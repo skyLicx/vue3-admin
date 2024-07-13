@@ -8,6 +8,7 @@ import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
 import 'element-plus/dist/index.css'
+import '@/api/request'
 
 const app = createApp(App)
 

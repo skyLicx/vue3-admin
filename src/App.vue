@@ -1,11 +1,26 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import Api from '@/api'
+const onClick = async () => {
+  const res = await Api.common.apiTest({
+    page: 2,
+    results: 10
+  })
+  console.log(res)
+}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+      @click="onClick"
+    />
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
