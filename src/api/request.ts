@@ -23,7 +23,7 @@ export interface RequestOptions extends AxiosRequestConfig {
   requestType?: 'json' | 'form'
 }
 
-export const baseApiUrl = import.meta.env.VITE_API_BASE_URL || '/'
+export const baseApiUrl = import.meta.env.VITE_BASE_API_URL || '/'
 
 const service = axios.create({
   baseURL: baseApiUrl,
@@ -46,10 +46,7 @@ service.interceptors.response.use(
   (response: AxiosResponse<BaseResponse>) => {
     const res = response.data
     if (res.code && res.code !== 200) {
-      ElMessage({
-        message: res.message || 'Error',
-        type: 'error'
-      })
+      ElMessage.error(res.message || 'Error')
       return Promise.reject(new Error(res.message || 'Error'))
     }
     return response

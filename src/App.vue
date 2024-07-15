@@ -2,12 +2,20 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Api from '@/api'
+// const onClick = async () => {
+//   const res = await Api.common.apiTest({
+//     page: 2,
+//     results: 10
+//   })
+//   console.log(res)
+// }
 const onClick = async () => {
-  const res = await Api.common.apiTest({
-    page: 2,
-    results: 10
-  })
-  console.log(res)
+  try {
+    const res = await Api.user.login({ username: 'admin', password: '123456' })
+    console.log(res)
+  } catch (error) {
+    // you can report use errorHandler or other
+  }
 }
 </script>
 
