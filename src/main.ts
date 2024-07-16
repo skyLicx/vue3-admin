@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 
 import ElementPlus from 'element-plus'
 import App from './App.vue'
-import router from './router'
+import { setupRouter } from './router'
 import 'element-plus/dist/index.css'
 import '@/api/request'
 
@@ -21,7 +21,9 @@ if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
 app.use(ElementPlus)
-
-app.mount('#app')
+async function setupApp() {
+  await setupRouter(app)
+  app.mount('#app')
+}
+setupApp()

@@ -29,6 +29,7 @@ module.exports = {
   },
   rules: {
     // 将 Prettier 相关的规则设为警告级别
-    'prettier/prettier': 'warn'
+    'prettier/prettier': 'warn',
+    'vue/multi-word-component-names': 0
   }
 }
