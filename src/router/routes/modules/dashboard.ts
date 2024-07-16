@@ -8,7 +8,7 @@ const routes: Array<RouteRecordRaw> = [
     name: moduleName,
     redirect: '/dashboard/workbench',
     meta: {
-      title: 'dashboard',
+      title: '仪表板',
       icon: ''
     },
     children: [
@@ -16,7 +16,7 @@ const routes: Array<RouteRecordRaw> = [
         path: 'workbench',
         name: `${moduleName}-workbench`,
         meta: {
-          title: 'workbench',
+          title: '工作台',
           icon: ''
         },
         component: () => import('@/views/dashboard/workbench.vue')

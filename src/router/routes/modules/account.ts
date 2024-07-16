@@ -15,13 +15,13 @@ const routes: Array<RouteRecordRaw> = [
         path: 'about',
         name: `${moduleName}-about`,
         component: () => import('@/views/account/about.vue'),
-        meta: { title: 'about' }
+        meta: { title: '关于' }
       },
       {
         path: 'settings',
         name: `${moduleName}-settings`,
         component: () => import('@/views/account/settings.vue'),
-        meta: { title: 'settings' }
+        meta: { title: '设置' }
       }
     ]
   }
