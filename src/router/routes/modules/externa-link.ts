@@ -1,6 +1,6 @@
 import { RouterView, type RouteRecordRaw } from 'vue-router'
 
-const routes: Array<RouteRecordRaw> = [
+const EXTERNALINK: Array<RouteRecordRaw> = [
   {
     path: 'https://arco.design',
     name: 'arcoWebsite',
@@ -25,4 +25,4 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-export default routes
+export default EXTERNALINK

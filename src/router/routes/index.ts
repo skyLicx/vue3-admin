@@ -1,24 +1,22 @@
-import outsideLayout from './outsideLayout'
-import basic from './basic'
 import type { RouteRecordRaw } from 'vue-router'
-import modules from './modules'
-
+import { REDIRECT_ROUTE, PAGE_NOT_FOUND_ROUTE } from '@/router/routes/base'
+import { clientRoutes } from '@/router/routes/modules'
 export const rootRoute: RouteRecordRaw = {
   path: '/',
-  name: 'Layout',
   redirect: '/dashboard/workbench',
-  component: () => import('@/layout/default-layout.vue'),
-  meta: {
-    title: '根路由'
-  },
   children: []
 }
-rootRoute.children = [...modules, ...basic]
-export const clientRoutes: Array<RouteRecordRaw> = [
+rootRoute.children = clientRoutes
+export const basicRoutes: Array<RouteRecordRaw> = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login/index.vue'),
+    meta: {
+      title: '登录'
+    }
+  },
   rootRoute,
-  // Layout之外的路由
-  ...outsideLayout,
-  // 基础路由
-  ...basic
+  REDIRECT_ROUTE,
+  PAGE_NOT_FOUND_ROUTE
 ]
-console.log(clientRoutes, 'clientRoutes')

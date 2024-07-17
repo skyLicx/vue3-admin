@@ -1,27 +1,25 @@
 import { computed } from 'vue'
-import type { RouteRecordRaw, RouteRecordNormalized } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import { cloneDeep } from 'lodash-es'
-import appClientMenus from '@/router/routes/modules'
-import basic from '@/router/routes/basic'
+import { clientRoutes } from '@/router/routes/modules'
 
 export default function useMenuTree() {
   // const permissionStore = usePermissionStore()
   // 路由
-  const appRoute = computed(() => {
+  const appRoutes = computed(() => {
     // 服务端数据
     // return permissionStore.getRouters
-    return appClientMenus.concat([...basic])
+    return clientRoutes.concat([])
   })
-  console.log(appRoute, 'xxx')
+
   // 侧边栏菜单
   const menuTree = computed(() => {
     // 拷贝路由
-    const copyRouter: any = cloneDeep(appRoute.value) as RouteRecordNormalized[]
-    console.log(copyRouter, '..')
+    const copyRouter: RouteRecordRaw[] = cloneDeep(appRoutes.value)
 
-    function travel(_routes: RouteRecordRaw[], layer: number) {
-      if (!_routes) return null
-      const collector: any = _routes.map((element) => {
+    function travel(routes: RouteRecordRaw[], layer: number) {
+      if (!routes) return null
+      const collector: any = routes.map((element) => {
         // 隐藏子路由菜单或没有子路由时children置空
         if (element.meta?.hideChildrenInMenu || !element.children) {
           element.children = []

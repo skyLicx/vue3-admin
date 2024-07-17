@@ -65,6 +65,7 @@ const renderSubMenu = () => {
 }
 const menu = () => (
   <el-menu
+    class="sider-menu-wrapper"
     style="--el-menu-bg-color: #33363D;--el-menu-text-color: #C8C8C8;--el-menu-active-color: #fff;--el-menu-hover-bg-color: #3F4247;"
     default-active={selectedKey.value}
   >
@@ -74,10 +75,12 @@ const menu = () => (
 </script>
 
 <style lang="scss" scoped>
-.el-menu:not(.el-menu--collapse) {
-  width: 200px;
+.sider-menu-wrapper {
+  min-height: 100vh;
+  background-color: #33363d;
 }
-.el-menu:not(.el-menu--popup) {
+:deep(.el-menu:not(.el-menu--collapse)) {
+  width: 200px;
   .el-menu-item.is-active {
     background-color: #3f4247;
   }

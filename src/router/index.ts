@@ -1,14 +1,17 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { whiteNameList } from '@/router/constant'
+import { basicRoutes } from './routes'
 
 // import { createRouterGuards } from './router-guards'
 
-import { whiteNameList } from './constant'
-import { clientRoutes } from './routes'
 import type { App } from 'vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: clientRoutes
+  routes: basicRoutes,
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 // reset router

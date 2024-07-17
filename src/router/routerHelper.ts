@@ -1,9 +1,8 @@
 import { asyncRoutes } from './asyncModules'
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
-import { rootRoute } from '@/router/routes'
+import routeModules, { rootRoute } from '@/router/routes/modules'
 import router from '@/router'
-import basic from '@/router/routes/basic'
-import routeModules from '@/router/routes/modules'
+import basic from '@/router/routes/base'
 
 export const transformMenuToRoutes = (
   routeList: RouteRecordRaw[],

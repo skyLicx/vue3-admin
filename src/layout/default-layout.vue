@@ -31,7 +31,6 @@ import PageLayout from './page-layout.vue'
   position: relative;
   .layout-sider {
     width: auto;
-    background-color: #33363d;
   }
   .el-menu {
     border-right: none;

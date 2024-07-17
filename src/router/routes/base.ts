@@ -1,6 +1,7 @@
 import { RouterView, type RouteRecordRaw } from 'vue-router'
 import { PAGE_NOT_FOUND_NAME, REDIRECT_NAME } from '@/router/constant'
 import router from '@/router'
+export const DEFAULT_LAYOUT = () => import('@/layout/default-layout.vue')
 
 /**
  * 重定向路由 主要用于刷新当前页面
