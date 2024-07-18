@@ -1,6 +1,7 @@
 <template>
-  <div>login</div>
+  <LoginForm />
 </template>
 
-<script lang="ts" setup></script>
-<style lang="less" scoped></style>
+<script lang="ts" setup>
+import LoginForm from './components/login-form.vue'
+</script>

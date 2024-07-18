@@ -2,14 +2,13 @@
 import '@/styles/reset.scss'
 
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import { setupRouter } from './router'
 import 'element-plus/dist/index.css'
 import '@/api/request'
-
+import store from './store'
 if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
   const { setupMock } = await import('./mocks/browser')
   setupMock.start({
@@ -20,7 +19,7 @@ if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
 
 const app = createApp(App)
 
-app.use(createPinia())
+app.use(store)
 app.use(ElementPlus)
 async function setupApp() {
   await setupRouter(app)
