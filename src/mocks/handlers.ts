@@ -16,7 +16,7 @@ export const handlers = [
         successResponseWrap({
           id: 1,
           username: 'admin',
-          token: 'xxxxx'
+          token: 'tokenxxxxx'
         })
       )
     }
