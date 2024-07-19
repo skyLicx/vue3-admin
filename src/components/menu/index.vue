@@ -2,27 +2,25 @@
   <component :is="menu" />
 </template>
 <script lang="tsx" setup>
-import { ref, watch, type VNode } from 'vue'
+import { computed, ref, watch, type VNode } from 'vue'
 import { useRouter, type RouteRecordRaw } from 'vue-router'
-import { openWindow, regexUrl } from '@/utils'
-import useMenuTree from './useMenuTree'
+import { openWindow } from '@/utils'
+import { useUserStore } from '@/store'
 
 const router = useRouter()
+const userStore = useUserStore()
 // 选中项
 const selectedKey = ref<string>('')
 // 路由菜单
-const { menuTree } = useMenuTree()
-// 路由跳转
-const goto = (item: RouteRecordRaw) => {
-  // Open external link
-  if (regexUrl.test(item.path)) {
+const menuTree = computed(() => userStore.menus)
+
+const handleMenuItemClick = (item: RouteRecordRaw) => {
+  const { isExt, extOpenMode } = item.meta || {}
+  if (isExt && extOpenMode !== 2) {
     openWindow(item.path)
-    selectedKey.value = item.name as string
-    return
+  } else {
+    router.push({ name: item.name })
   }
-  router.push({
-    name: item.name
-  })
 }
 
 watch(
@@ -50,7 +48,7 @@ const renderSubMenu = () => {
         )
       } else {
         node = (
-          <el-menu-item index={route.name} onClick={() => goto(route)}>
+          <el-menu-item index={route.name} onClick={() => handleMenuItemClick(route)}>
             {{
               title: () => route.meta?.title
             }}

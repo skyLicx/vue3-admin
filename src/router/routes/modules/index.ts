@@ -11,4 +11,6 @@ function formatModules(_modules: any, result: RouteRecordRaw[]) {
   })
   return result
 }
-export const clientRoutes: RouteRecordRaw[] = formatModules(modules, [])
+const routeModules: RouteRecordRaw[] = formatModules(modules, [])
+
+export default routeModules

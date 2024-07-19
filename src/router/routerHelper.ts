@@ -1,8 +1,10 @@
 import { asyncRoutes } from './asyncModules'
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
-import routeModules, { rootRoute } from '@/router/routes/modules'
+import routeModules from '@/router/routes/modules'
+import { rootRoute } from '@/router/routes'
 import router from '@/router'
-import basic from '@/router/routes/base'
+import { uniqueSlash } from '@/utils'
+import { DEFAULT_LAYOUT } from '@/router/routes/base'
 
 export const transformMenuToRoutes = (
   routeList: RouteRecordRaw[],
@@ -10,30 +12,32 @@ export const transformMenuToRoutes = (
 ) => {
   routeList.forEach((route) => {
     route.meta ||= {} as RouteMeta
-    const { show = 1, type, isExt, extOpenMode } = route.meta
+    const { type, isExt, extOpenMode } = route.meta
     const compPath = route.component as unknown as string
-
-    // 是否在菜单中隐藏
-    route.meta.hideInMenu ??= !show
 
     if (!isExt) {
       // 规范化路由路径
       route.path = route.path.startsWith('/') ? route.path : `/${route.path}`
       if (parentRoute?.path && !route.path.startsWith(parentRoute.path)) {
-        //todo
+        route.path = uniqueSlash(`${parentRoute.path}/${route.path}`)
       }
     }
     // 以路由路径作为唯一的路由名称
     route.name = route.path
 
     if (type === 0) {
-      route.component = null
+      route.component = DEFAULT_LAYOUT
       if (route.children?.length) {
+        // 在子路由中查找第一个 meta.isExt 为false的子路由
         const redirectChild = route.children.find((n) => !n.meta?.isExt)
+        // 如果没有找到这样的子路由
         if (!redirectChild) {
+          // 删除当前路由对象中的 redirect 属性
           Reflect.deleteProperty(route, 'redirect')
         } else {
-          // route.redirect ??= uniqueSlash(`/${route.path}/${redirectChild.path}`);
+          // 如果找到这样的子路由，并且当前路由对象没有 redirect 属性
+          // 设置 redirect 属性为 `/${route.path}/${redirectChild.path}`
+          route.redirect ??= uniqueSlash(`/${route.path}/${redirectChild.path}`)
         }
       }
     } else if (type === 1) {
@@ -45,12 +49,11 @@ export const transformMenuToRoutes = (
         route.component = asyncRoutes[compPath]
         // 前端 src/views 目录下无对应路由组件
         if (!route.component) {
-          // route.component = () => import('@/views/error/comp-not-found.vue')
-          // warn(`在src/views/下找不到 ${compPath}.vue 或 ${compPath}.tsx, 请自行创建!`)
+          route.component = () => import('@/views/error/comp-not-found.vue')
+          console.warn(`在src/views/下找不到 ${compPath}.vue 或 ${compPath}.tsx, 请自行创建!`)
         }
       }
     }
-
     if (route.children?.length) {
       transformMenuToRoutes(route.children, route)
     }
@@ -60,10 +63,9 @@ export const transformMenuToRoutes = (
 
 export const generateDynamicRoutes = (menus: RouteRecordRaw[]) => {
   const routes = [...routeModules, ...transformMenuToRoutes(menus)]
-  const allRoute = [...routes, ...basic]
-  genNamePathForRoutes(allRoute)
+  const allRoute = [...routes]
+  // genNamePathForRoutes(allRoute)
   rootRoute.children = allRoute
-  console.log(rootRoute, 'rootRouterootRoute')
   router.addRoute(rootRoute)
   return routes
 }

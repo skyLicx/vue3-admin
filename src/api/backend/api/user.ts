@@ -7,3 +7,10 @@ export function login(body: API.LoginDto, options?: RequestOptions) {
     ...(options || {})
   })
 }
+
+export function menus(options?: RequestOptions) {
+  return request<API.Menu[]>('/menus', {
+    method: 'POST',
+    ...(options || {})
+  })
+}
