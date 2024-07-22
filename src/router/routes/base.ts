@@ -62,7 +62,7 @@ export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
   children: [
     {
       path: '/:pathMatch(.*)*',
-      // name: PAGE_NOT_FOUND_NAME,
+      name: PAGE_NOT_FOUND_NAME,
       component: () => import('@/views/error/404.vue'),
       meta: {
         title: 'PageNotFound',

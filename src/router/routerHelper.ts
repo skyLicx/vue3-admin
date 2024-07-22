@@ -4,7 +4,7 @@ import routeModules from '@/router/routes/modules'
 import { rootRoute } from '@/router/routes'
 import router from '@/router'
 import { uniqueSlash } from '@/utils'
-import { DEFAULT_LAYOUT } from '@/router/routes/base'
+import base, { DEFAULT_LAYOUT } from '@/router/routes/base'
 
 export const transformMenuToRoutes = (
   routeList: RouteRecordRaw[],
@@ -61,8 +61,8 @@ export const transformMenuToRoutes = (
   return routeList
 }
 
-export const generateDynamicRoutes = (menus: RouteRecordRaw[]) => {
-  const routes = [...routeModules, ...transformMenuToRoutes(menus)]
+export const generateDynamicRoutes = (dynamicRoutes: RouteRecordRaw[]) => {
+  const routes = [...routeModules, ...transformMenuToRoutes([...dynamicRoutes, ...base])]
   const allRoute = [...routes]
   // genNamePathForRoutes(allRoute)
   rootRoute.children = allRoute

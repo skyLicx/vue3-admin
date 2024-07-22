@@ -13,6 +13,7 @@ const userStore = useUserStore()
 const selectedKey = ref<string>('')
 // 路由菜单
 const menuTree = computed(() => userStore.menus)
+console.log(menuTree, 'menuTreemenuTree')
 
 const handleMenuItemClick = (item: RouteRecordRaw) => {
   const { isExt, extOpenMode } = item.meta || {}
@@ -76,9 +77,9 @@ const menu = () => (
 .sider-menu-wrapper {
   min-height: 100vh;
   background-color: #33363d;
+  width: 200px;
 }
 :deep(.el-menu:not(.el-menu--collapse)) {
-  width: 200px;
   .el-menu-item.is-active {
     background-color: #3f4247;
   }

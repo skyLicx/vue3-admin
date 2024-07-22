@@ -1,8 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { whiteNameList } from '@/router/constant'
 import { basicRoutes } from './routes'
-
-// import { createRouterGuards } from './router-guards'
+import { createRouterGuards } from './routerGuards'
 
 import type { App } from 'vue'
 
@@ -26,7 +25,7 @@ export function resetRouter() {
 
 export async function setupRouter(app: App) {
   // 创建路由守卫
-  // createRouterGuards(router, whiteNameList)
+  createRouterGuards(router, whiteNameList)
 
   app.use(router)
 

@@ -13,5 +13,3 @@ export const asyncRoutes = Object.entries(modulesFiles).reduce((routes, [url, im
 
   return routes
 }, {} as Recordable<ImportVueFileFnType>)
-
-console.log('asyncRoutes', asyncRoutes)

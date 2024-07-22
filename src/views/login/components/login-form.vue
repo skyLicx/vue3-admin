@@ -16,12 +16,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import useLoading from '@/hooks/loading'
 import { ElMessage } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 
+const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
 const { loading, setLoading } = useLoading()
@@ -43,9 +44,7 @@ const login = async () => {
       setLoading(true)
       try {
         await userStore.login(form.value)
-        router.push({
-          path: '/dashboard/workbench'
-        })
+        setTimeout(() => router.replace((route.query.redirect as string) || '/'))
         ElMessage({
           message: '登录成功',
           type: 'success'
