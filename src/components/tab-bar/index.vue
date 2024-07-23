@@ -46,7 +46,7 @@ const removeTab = (key: string) => {
   if (tabsList.value.length === 1) {
     return ElMessage.warning('这已经是最后一页，不能再关闭了！')
   }
-  const removeRoute = tabsList.value.find((item) => item.name === key)
+  const removeRoute = tabsList.value.find((item) => item.fullPath === key)
   tabsViewStore.closeCurrentTab(removeRoute!)
 }
 </script>
