@@ -1,6 +1,6 @@
 // 引入公共样式
 import '@/styles/reset.scss'
-
+import '@/styles/transition.scss'
 import { createApp } from 'vue'
 
 import ElementPlus from 'element-plus'

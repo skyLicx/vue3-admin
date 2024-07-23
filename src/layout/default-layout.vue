@@ -6,7 +6,9 @@
       </el-scrollbar>
     </el-aside>
     <el-container>
-      <el-header class="layout-header"> </el-header>
+      <el-header class="layout-header">
+        <TabBar />
+      </el-header>
       <el-main class="layout-main">
         <el-scrollbar>
           <section class="app-main">
@@ -21,6 +23,7 @@
 
 <script lang="ts" setup>
 import Menu from '@/components/menu/index.vue'
+import TabBar from '@/components/tab-bar/index.vue'
 import PageLayout from './page-layout.vue'
 </script>
 
