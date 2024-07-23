@@ -13,7 +13,6 @@ const userStore = useUserStore()
 const selectedKey = ref<string>('')
 // 路由菜单
 const menuTree = computed(() => userStore.menus)
-console.log(menuTree, 'menuTreemenuTree')
 
 const handleMenuItemClick = (item: RouteRecordRaw) => {
   const { isExt, extOpenMode } = item.meta || {}

@@ -9,20 +9,12 @@
 </template>
 
 <script lang="ts" setup>
-const cacheList = []
-// import { computed } from 'vue'
-// import { useTabBarStore } from '@/store'
-// import useAppStore from '@/store/modules/app'
+import { useKeepAliveStore } from '@/store/modules/keepAlive'
+import { computed } from 'vue'
 
-// const appStore = useAppStore()
-
-// const tabBarStore = useTabBarStore()
-// // 缓存路由列表
-// const cacheList = computed(() => {
-//   return tabBarStore.getCacheList
-// })
-
-// const isRouterAlive = computed(() => {
-//   return appStore.getRouterAlive
-// })
+const keepAliveStore = useKeepAliveStore()
+// 缓存路由列表
+const cacheList = computed(() => {
+  return keepAliveStore.list
+})
 </script>

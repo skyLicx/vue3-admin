@@ -3,7 +3,6 @@ import Api from '@/api/'
 import { ref } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { generateDynamicRoutes } from '@/router/routerHelper'
-import { cloneDeep } from 'lodash-es'
 
 const useUserStore = defineStore(
   'user',
@@ -106,7 +105,7 @@ const useUserStore = defineStore(
                   id: 2,
                   path: '/system/user',
                   name: '用户管理',
-                  component: 'system/user/index',
+                  component: 'system/user',
                   meta: {
                     title: '用户管理',
                     icon: 'ant-design:user-outlined',
@@ -120,8 +119,9 @@ const useUserStore = defineStore(
                   id: 3,
                   path: '/system/role',
                   name: '角色管理',
-                  component: 'system/role/index',
+                  component: 'system/role',
                   meta: {
+                    keepAlive: true,
                     title: '角色管理',
                     icon: 'ep:user',
                     isExt: false,
@@ -134,7 +134,7 @@ const useUserStore = defineStore(
                   id: 4,
                   path: '/system/menu',
                   name: '菜单管理',
-                  component: 'system/menu/index',
+                  component: 'system/menu',
                   meta: {
                     title: '菜单管理',
                     icon: 'ep:menu',

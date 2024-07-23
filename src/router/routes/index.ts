@@ -1,14 +1,19 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { REDIRECT_ROUTE, PAGE_NOT_FOUND_ROUTE, DEFAULT_LAYOUT } from '@/router/routes/base'
+import base, { DEFAULT_LAYOUT } from '@/router/routes/base'
 import { LOGIN_NAME } from '../constant'
 export const rootRoute: RouteRecordRaw = {
   path: '/',
+  name: 'Layout',
   redirect: '/dashboard/workbench',
   component: DEFAULT_LAYOUT,
+  meta: {
+    title: '根路由'
+  },
   children: []
 }
 
 export const basicRoutes: Array<RouteRecordRaw> = [
+  rootRoute,
   {
     path: '/login',
     name: LOGIN_NAME,
@@ -17,7 +22,5 @@ export const basicRoutes: Array<RouteRecordRaw> = [
       title: '登录'
     }
   },
-  rootRoute,
-  REDIRECT_ROUTE,
-  PAGE_NOT_FOUND_ROUTE
+  ...base
 ]
