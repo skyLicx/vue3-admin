@@ -1,5 +1,4 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { DEFAULT_LAYOUT } from '../base'
 
 const moduleName = 'account'
 
@@ -7,7 +6,6 @@ const routes: RouteRecordRaw = {
   path: '/account',
   name: 'account',
   redirect: '/account/settings',
-  component: DEFAULT_LAYOUT,
   meta: {
     title: '个人中心'
   },

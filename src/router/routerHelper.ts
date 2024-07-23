@@ -4,7 +4,7 @@ import routeModules from '@/router/routes/modules'
 import { rootRoute } from '@/router/routes'
 import router from '@/router'
 import { uniqueSlash } from '@/utils'
-import base, { DEFAULT_LAYOUT } from '@/router/routes/base'
+import base from '@/router/routes/base'
 
 export const transformMenuToRoutes = (
   routeList: RouteRecordRaw[],
@@ -26,7 +26,7 @@ export const transformMenuToRoutes = (
     route.name = route.path
 
     if (type === 0) {
-      route.component = DEFAULT_LAYOUT
+      route.component = null
       if (route.children?.length) {
         // 在子路由中查找第一个 meta.isExt 为false的子路由
         const redirectChild = route.children.find((n) => !n.meta?.isExt)
@@ -62,8 +62,8 @@ export const transformMenuToRoutes = (
 }
 
 export const generateDynamicRoutes = (dynamicRoutes: RouteRecordRaw[]) => {
-  const routes = [...routeModules, ...transformMenuToRoutes([...dynamicRoutes, ...base])]
-  const allRoute = [...routes]
+  const routes = [...routeModules, ...transformMenuToRoutes(dynamicRoutes)]
+  const allRoute = [...routes, ...base]
   // genNamePathForRoutes(allRoute)
   rootRoute.children = allRoute
   router.addRoute(rootRoute)
