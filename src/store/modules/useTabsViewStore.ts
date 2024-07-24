@@ -1,7 +1,7 @@
 import router from '@/router'
 import { LOGIN_NAME, PAGE_NOT_FOUND_NAME, REDIRECT_NAME } from '@/router/constant'
 import { defineStore } from 'pinia'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type Ref } from 'vue'
 import { useRoute, type RouteLocationMatched, type RouteLocationNormalizedLoaded } from 'vue-router'
 
 /** 不需要出现在标签页中的路由 */
@@ -11,7 +11,7 @@ export const useTabsViewStore = defineStore(
   'tabs-view',
   () => {
     const currentRoute = useRoute()
-    const tabsList = ref<RouteLocationNormalizedLoaded[]>([])
+    const tabsList: Ref<RouteLocationNormalizedLoaded[]> = ref([])
 
     /** 给定的路由是否在排除名单里面 */
     const isInRouteExcludes = (route: RouteLocationNormalizedLoaded) => {
