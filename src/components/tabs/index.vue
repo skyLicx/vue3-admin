@@ -24,6 +24,10 @@ import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { ElMessage, type TabsPaneContext } from 'element-plus'
 
+defineOptions({
+  name: 'Tabs'
+})
+
 const router = useRouter()
 const tabsViewStore = useTabsViewStore()
 const tabsList = computed(() => {

@@ -1,12 +1,12 @@
-// 引入公共样式
-import '@/styles/reset.scss'
-import '@/styles/transition.scss'
-import { createApp } from 'vue'
+import '@/styles/index.scss'
+
+import { createApp, type Component } from 'vue'
 
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import { setupRouter } from './router'
 import 'element-plus/dist/index.css'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/api/request'
 import store from './store'
 if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
@@ -18,6 +18,10 @@ if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
 }
 
 const app = createApp(App)
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component as Component)
+}
 
 app.use(store)
 app.use(ElementPlus)

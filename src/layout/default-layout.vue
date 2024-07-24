@@ -1,30 +1,36 @@
 <template>
   <el-container class="layout">
     <el-aside class="layout-sider">
-      <el-scrollbar>
+      <Logo />
+      <el-scrollbar class="menu-scroll">
         <Menu />
       </el-scrollbar>
     </el-aside>
     <el-container>
       <el-header class="layout-header">
-        <TabBar />
+        <Tabs />
       </el-header>
       <el-main class="layout-main">
-        <el-scrollbar>
-          <section class="app-main">
-            <PageLayout />
-          </section>
-        </el-scrollbar>
+        <section class="app-main">
+          <PageLayout />
+        </section>
       </el-main>
-      <!-- <el-footer>Footer</el-footer> -->
+      <el-footer v-if="showFooter">
+        <Footer />
+      </el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts" setup>
+import Logo from '@/components/logo/index.vue'
+import Footer from '@/components/footer/index.vue'
 import Menu from '@/components/menu/index.vue'
-import TabBar from '@/components/tab-bar/index.vue'
+import Tabs from '@/components/tabs/index.vue'
 import PageLayout from './page-layout.vue'
+import { ref } from 'vue'
+
+const showFooter = ref(false)
 </script>
 
 <style lang="scss" scoped>
@@ -35,24 +41,18 @@ import PageLayout from './page-layout.vue'
   .layout-sider {
     width: auto;
   }
-  .el-menu {
-    border-right: none;
+  :deep(.menu-scroll) {
+    height: calc(100vh - $logo-header);
+    .el-scrollbar__view {
+      height: 100%;
+    }
   }
   .layout-header {
     padding: 0;
     height: auto;
   }
   .layout-main {
-    padding: 0;
-    background-color: #fff;
-  }
-  :deep(.el-scrollbar__view) {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .app-main {
-    flex: 1;
+    background-color: #f3f4f5;
   }
 }
 </style>
