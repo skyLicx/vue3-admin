@@ -5,6 +5,7 @@ import { rootRoute } from '@/router/routes'
 import router from '@/router'
 import { uniqueSlash } from '@/utils'
 import base from '@/router/routes/base'
+import IFramePage from '@/components/iframe-page'
 
 export const transformMenuToRoutes = (
   routeList: RouteRecordRaw[],
@@ -43,7 +44,7 @@ export const transformMenuToRoutes = (
     } else if (type === 1) {
       // 内嵌页面
       if (isExt && extOpenMode === 2) {
-        // route.component = <IFramePage src={route.path} />;
+        route.component = <IFramePage src={route.path} />
         route.path = route.path.replace(new RegExp('://'), '/')
       } else if (compPath) {
         route.component = asyncRoutes[compPath]

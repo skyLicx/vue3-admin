@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 const moduleName = 'dashboard'
 
 const DASHBOARD: RouteRecordRaw = {
-  path: '/dashboard',
+  path: '/dashboard/workbench',
   name: moduleName,
   component: () => import('@/views/dashboard/workbench.vue'),
   meta: {

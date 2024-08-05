@@ -94,8 +94,6 @@ const useUserStore = defineStore(
               meta: {
                 title: '系统管理',
                 icon: 'Menu',
-                isExt: false,
-                extOpenMode: 1,
                 type: 0,
                 orderNo: 254
               },
@@ -109,8 +107,6 @@ const useUserStore = defineStore(
                   meta: {
                     title: '用户管理',
                     icon: 'Menu',
-                    isExt: false,
-                    extOpenMode: 1,
                     type: 1,
                     orderNo: 0
                   }
@@ -124,8 +120,6 @@ const useUserStore = defineStore(
                     keepAlive: true,
                     title: '角色管理',
                     icon: 'Menu',
-                    isExt: false,
-                    extOpenMode: 1,
                     type: 1,
                     orderNo: 1
                   }
@@ -138,8 +132,6 @@ const useUserStore = defineStore(
                   meta: {
                     title: '菜单管理',
                     icon: 'Menu',
-                    isExt: false,
-                    extOpenMode: 1,
                     type: 1,
                     orderNo: 2
                   }

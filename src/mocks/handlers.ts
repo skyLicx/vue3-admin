@@ -87,7 +87,6 @@ export const handlers = [
           title: '系统管理',
           icon: 'ant-design:setting-outlined',
           isExt: false,
-          extOpenMode: 1,
           type: 0,
           orderNo: 254
         },
@@ -102,7 +101,6 @@ export const handlers = [
               title: '用户管理',
               icon: 'ant-design:user-outlined',
               isExt: false,
-              extOpenMode: 1,
               type: 1,
               orderNo: 0
             }
@@ -116,7 +114,6 @@ export const handlers = [
               title: '角色管理',
               icon: 'ep:user',
               isExt: false,
-              extOpenMode: 1,
               type: 1,
               orderNo: 1
             }
@@ -130,7 +127,6 @@ export const handlers = [
               title: '菜单管理',
               icon: 'ep:menu',
               isExt: false,
-              extOpenMode: 1,
               type: 1,
               orderNo: 2
             }

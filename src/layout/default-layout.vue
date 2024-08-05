@@ -12,9 +12,7 @@
         <Tabs />
       </el-header>
       <el-main class="layout-main">
-        <section class="app-main">
-          <PageLayout />
-        </section>
+        <PageLayout />
       </el-main>
       <el-footer v-if="showFooter">
         <Footer />
