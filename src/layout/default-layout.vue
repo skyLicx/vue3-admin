@@ -14,7 +14,7 @@
       <el-main class="layout-main">
         <PageLayout />
       </el-main>
-      <el-footer v-if="showFooter">
+      <el-footer v-if="showFooter" class="layout-footer">
         <Footer />
       </el-footer>
     </el-container>
@@ -28,9 +28,10 @@ import Menu from '@/components/menu/index.vue'
 import Tabs from '@/components/tabs/index.vue'
 import CollapseIcon from '@/components/CollapseIcon.vue'
 import PageLayout from './page-layout.vue'
-import { ref } from 'vue'
-
-const showFooter = ref(false)
+import { computed } from 'vue'
+import { useGlobalStore } from '@/store/modules/global'
+const globalStore = useGlobalStore()
+const showFooter = computed(() => globalStore.showFooter)
 </script>
 
 <style lang="scss" scoped>
@@ -53,6 +54,9 @@ const showFooter = ref(false)
   }
   .layout-main {
     background-color: #f3f4f5;
+  }
+  .layout-footer {
+    height: $footer-height;
   }
 }
 </style>

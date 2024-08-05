@@ -3,7 +3,8 @@ import type { GlobalState } from '../interface'
 
 export const useGlobalStore = defineStore('global', {
   state: (): GlobalState => ({
-    isCollapse: false
+    isCollapse: false,
+    showFooter: true
   }),
   actions: {
     setGlobalState<K extends keyof GlobalState>(key: K, value: GlobalState[K]) {
