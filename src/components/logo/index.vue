@@ -20,7 +20,7 @@ const isCollapse = computed(() => globalStore.isCollapse)
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
+  width: 220px;
   transition: all 0.28s;
   .logo-img {
     width: 60px;

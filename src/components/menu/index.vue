@@ -103,31 +103,34 @@ const menu = () => (
 .sider-menu-wrapper {
   border-right: none;
   &:not(.el-menu--collapse) {
-    width: 200px;
-    .el-menu {
-      .el-menu-item {
-        margin: 0 10px;
-        border-radius: 4px;
-      }
+    width: 220px;
+    .el-sub-menu__title {
+      margin: 0 10px;
+    }
+    .el-menu-item {
+      margin: 0 10px;
+      border-radius: 4px;
     }
   }
   &.el-menu--collapse {
     .el-sub-menu.is-active {
-      background-color: #2b3d47;
+      background-color: $side-menu-active-bg-color;
     }
   }
-  .el-sub-menu.is-active {
-    .el-sub-menu__title {
-      color: var(--el-menu-active-color);
-    }
+  .el-sub-menu.is-active > .el-sub-menu__title {
+    color: var(--el-menu-active-color);
   }
   .el-menu-item.is-active {
-    background-color: #2b3d47;
+    background-color: $side-menu-active-bg-color;
   }
 }
+
 .sider-menu-popper {
+  .el-sub-menu.is-active > .el-sub-menu__title {
+    color: var(--el-menu-active-color);
+  }
   .el-menu-item.is-active {
-    background-color: #2b3d47;
+    background-color: $side-menu-active-bg-color;
   }
 }
 </style>

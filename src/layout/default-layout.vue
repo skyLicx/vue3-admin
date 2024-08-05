@@ -45,9 +45,6 @@ const showFooter = computed(() => globalStore.showFooter)
     display: flex;
     flex-direction: column;
   }
-  .menu-scroll {
-    margin-top: 20px;
-  }
   .layout-header {
     padding: 0;
     height: auto;
