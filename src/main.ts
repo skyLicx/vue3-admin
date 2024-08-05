@@ -1,11 +1,10 @@
-import '@/styles/index.scss'
-
 import { createApp, type Component } from 'vue'
 
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import { setupRouter } from './router'
 import 'element-plus/dist/index.css'
+import '@/styles/index.scss'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/api/request'
 import store from './store'

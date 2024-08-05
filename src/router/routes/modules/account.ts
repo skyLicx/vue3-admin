@@ -7,20 +7,21 @@ const routes: RouteRecordRaw = {
   name: 'account',
   redirect: '/account/settings',
   meta: {
-    title: '个人中心'
+    title: '个人中心',
+    icon: 'User'
   },
   children: [
     {
       path: 'about',
       name: `${moduleName}-about`,
       component: () => import('@/views/account/about.vue'),
-      meta: { title: '关于' }
+      meta: { title: '关于', icon: 'Menu' }
     },
     {
       path: 'settings',
       name: `${moduleName}-settings`,
       component: () => import('@/views/account/settings.vue'),
-      meta: { title: '设置' }
+      meta: { title: '设置', icon: 'Menu' }
     }
   ]
 }

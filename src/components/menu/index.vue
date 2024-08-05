@@ -2,13 +2,20 @@
   <component :is="menu" />
 </template>
 <script lang="tsx" setup>
+defineOptions({
+  name: 'SideMenu'
+})
+
 import { computed, h, ref, resolveComponent, watch, type VNode } from 'vue'
 import { useRouter, type RouteMeta, type RouteRecordRaw } from 'vue-router'
 import { openWindow } from '@/utils'
 import { useUserStore } from '@/store'
+import { useGlobalStore } from '@/store/modules/global'
 
 const router = useRouter()
 const userStore = useUserStore()
+const globalStore = useGlobalStore()
+const isCollapse = computed(() => globalStore.isCollapse)
 // 选中项
 const selectedKey = ref<string>('')
 // 路由菜单
@@ -63,7 +70,7 @@ const renderSubMenu = () => {
         node = (
           <el-menu-item index={route.name} onClick={() => handleMenuItemClick(route)}>
             {{
-              title: () => renderMenuTitle(route.meta!)
+              default: () => renderMenuTitle(route.meta!)
             }}
           </el-menu-item>
         )
@@ -77,31 +84,37 @@ const renderSubMenu = () => {
 const menu = () => (
   <el-menu
     class="sider-menu-wrapper"
-    background-color="#1F2C33"
-    text-color="#C8C8C8"
-    active-text-color="#0081E4"
+    popper-class={'sider-menu-popper'}
     default-active={selectedKey.value}
+    collapse={isCollapse.value}
   >
     {renderSubMenu()}
   </el-menu>
 )
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .sider-menu-wrapper {
-  min-height: 100%;
-  width: 200px;
   border-right: none;
-}
-:deep(.el-sub-menu__title) {
-  margin: 0 14px;
-}
-:deep(.el-menu-item) {
-  margin: 0 14px;
-  border-radius: 4px;
-  // padding-left: 40px;
-}
-:deep(.el-menu:not(.el-menu--collapse)) {
+  &:not(.el-menu--collapse) {
+    width: 200px;
+    .el-menu {
+      .el-menu-item {
+        margin: 0 14px;
+        border-radius: 4px;
+      }
+    }
+  }
+  &.el-menu--collapse {
+    .el-sub-menu.is-active {
+      background-color: #2b3d47;
+    }
+  }
+  .el-sub-menu.is-active {
+    .el-sub-menu__title {
+      color: var(--el-menu-active-color);
+    }
+  }
   .el-menu-item.is-active {
     background-color: #2b3d47;
   }

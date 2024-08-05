@@ -2,23 +2,12 @@ import { RouterView, type RouteRecordRaw } from 'vue-router'
 
 const EXTERNALINK: Array<RouteRecordRaw> = [
   {
-    path: 'https://arco.design',
+    path: 'https://element-plus.org/zh-CN/',
     name: 'arcoWebsite',
     component: RouterView,
     meta: {
-      title: '后台代码仓库',
-      icon: '',
-      isExt: true,
-      extOpenMode: 1
-    }
-  },
-  {
-    path: 'https://arco.design/vue/docs/pro/faq',
-    name: 'faq',
-    component: RouterView,
-    meta: {
-      title: 'faq',
-      icon: '',
+      title: 'element-plus',
+      icon: 'Link',
       isExt: true,
       extOpenMode: 1
     }

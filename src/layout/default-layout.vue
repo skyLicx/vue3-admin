@@ -5,6 +5,7 @@
       <el-scrollbar class="menu-scroll">
         <Menu />
       </el-scrollbar>
+      <CollapseIcon />
     </el-aside>
     <el-container>
       <el-header class="layout-header">
@@ -27,6 +28,7 @@ import Logo from '@/components/logo/index.vue'
 import Footer from '@/components/footer/index.vue'
 import Menu from '@/components/menu/index.vue'
 import Tabs from '@/components/tabs/index.vue'
+import CollapseIcon from '@/components/CollapseIcon.vue'
 import PageLayout from './page-layout.vue'
 import { ref } from 'vue'
 
@@ -40,12 +42,12 @@ const showFooter = ref(false)
   position: relative;
   .layout-sider {
     width: auto;
+    background-color: $side-bg-color;
+    display: flex;
+    flex-direction: column;
   }
-  :deep(.menu-scroll) {
-    height: calc(100vh - $logo-header);
-    .el-scrollbar__view {
-      height: 100%;
-    }
+  .menu-scroll {
+    margin-top: 20px;
   }
   .layout-header {
     padding: 0;

@@ -1,27 +1,31 @@
 <template>
   <div class="logo">
     <img class="logo-img" src="~@/assets/logo.png" alt="" />
-    <p class="title">Xuan-Admin</p>
+    <span v-if="!isCollapse" class="title">xxxx</span>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useGlobalStore } from '@/store/modules/global'
 defineOptions({
   name: 'Logo'
 })
+const globalStore = useGlobalStore()
+const isCollapse = computed(() => globalStore.isCollapse)
 </script>
 <style lang="scss" scoped>
 .logo {
-  height: $logo-header;
-  background-color: #1f2c33;
+  height: $logo-header-height;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   .logo-img {
-    height: 80px;
+    width: 60px;
   }
   .title {
     color: #fff;
+    margin: 0 10px;
   }
 }
 </style>

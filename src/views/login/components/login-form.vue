@@ -61,10 +61,8 @@ const login = async () => {
 
 <style lang="scss" scoped>
 .login-form-wrapper {
-  width: 320px;
   padding: 20px;
-  margin: 50px auto;
-  border: 1px solid #c4dcff;
+  background-color: #fff;
   border-radius: 15px;
 }
 </style>

@@ -40,7 +40,7 @@ const useUserStore = defineStore(
               name: '文档',
               meta: {
                 title: '文档',
-                icon: 'document',
+                icon: 'Menu',
                 type: 0,
                 orderNo: 2
               },
@@ -51,7 +51,7 @@ const useUserStore = defineStore(
                   name: 'Typeorm中文文档(外链)',
                   meta: {
                     title: 'Typeorm中文文档(外链)',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: true,
                     extOpenMode: 1,
                     type: 1,
@@ -64,7 +64,7 @@ const useUserStore = defineStore(
                   name: 'Nest.js中文文档(内嵌)',
                   meta: {
                     title: 'Nest.js中文文档(内嵌)',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: true,
                     extOpenMode: 2,
                     type: 1,
@@ -77,7 +77,7 @@ const useUserStore = defineStore(
                   name: 'antdv文档(内嵌)',
                   meta: {
                     title: 'antdv文档(内嵌)',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: true,
                     extOpenMode: 2,
                     type: 1,
@@ -93,7 +93,7 @@ const useUserStore = defineStore(
               name: '系统管理',
               meta: {
                 title: '系统管理',
-                icon: '',
+                icon: 'Menu',
                 isExt: false,
                 extOpenMode: 1,
                 type: 0,
@@ -108,7 +108,7 @@ const useUserStore = defineStore(
                   component: 'system/user',
                   meta: {
                     title: '用户管理',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: false,
                     extOpenMode: 1,
                     type: 1,
@@ -123,7 +123,7 @@ const useUserStore = defineStore(
                   meta: {
                     keepAlive: true,
                     title: '角色管理',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: false,
                     extOpenMode: 1,
                     type: 1,
@@ -137,7 +137,7 @@ const useUserStore = defineStore(
                   component: 'system/menu',
                   meta: {
                     title: '菜单管理',
-                    icon: '',
+                    icon: 'Menu',
                     isExt: false,
                     extOpenMode: 1,
                     type: 1,
