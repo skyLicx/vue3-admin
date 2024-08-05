@@ -46,10 +46,10 @@ const renderMenuTitle = (meta: RouteMeta) => {
   return icon ? (
     <>
       <el-icon>{h(resolveComponent(icon))}</el-icon>
-      <span>{title}</span>
+      <span class="ellipse">{title}</span>
     </>
   ) : (
-    <span>{title}</span>
+    <span class="ellipse">{title}</span>
   )
 }
 
@@ -73,7 +73,7 @@ const renderSubMenu = () => {
             index={route.name}
             onClick={() => handleMenuItemClick(route)}
             v-slots={{
-              title: () => route.meta!.title
+              title: () => <span class="ellipse">{route.meta!.title}</span>
             }}
           >
             {route.meta!.icon ? <el-icon>{h(resolveComponent(route.meta!.icon))}</el-icon> : ''}
