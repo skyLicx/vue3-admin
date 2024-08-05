@@ -92,6 +92,7 @@ const menu = () => (
     popper-class={'sider-menu-popper'}
     default-active={selectedKey.value}
     collapse={isCollapse.value}
+    unique-opened={true}
   >
     {renderSubMenu()}
   </el-menu>

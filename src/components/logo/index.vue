@@ -1,7 +1,7 @@
 <template>
-  <div class="logo">
+  <div class="logo" :class="{ collapse: isCollapse }">
     <img class="logo-img" src="~@/assets/logo.png" alt="" />
-    <span v-if="!isCollapse" class="title">xxxx</span>
+    <span class="title">xxxx</span>
   </div>
 </template>
 
@@ -20,12 +20,20 @@ const isCollapse = computed(() => globalStore.isCollapse)
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 200px;
+  transition: all 0.28s;
   .logo-img {
     width: 60px;
   }
   .title {
     color: #fff;
     margin: 0 10px;
+  }
+}
+.logo.collapse {
+  width: 64px;
+  .title {
+    display: none;
   }
 }
 </style>
