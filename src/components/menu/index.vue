@@ -59,19 +59,24 @@ const renderSubMenu = () => {
       let node: VNode
       if (route.children?.length) {
         node = (
-          <el-sub-menu index={route.name}>
-            {{
+          <el-sub-menu
+            index={route.name}
+            v-slots={{
               title: () => renderMenuTitle(route.meta!),
               default: () => travel(route.children as RouteRecordRaw[])
             }}
-          </el-sub-menu>
+          ></el-sub-menu>
         )
       } else {
         node = (
-          <el-menu-item index={route.name} onClick={() => handleMenuItemClick(route)}>
-            {{
-              default: () => renderMenuTitle(route.meta!)
+          <el-menu-item
+            index={route.name}
+            onClick={() => handleMenuItemClick(route)}
+            v-slots={{
+              title: () => route.meta!.title
             }}
+          >
+            {route.meta!.icon ? <el-icon>{h(resolveComponent(route.meta!.icon))}</el-icon> : ''}
           </el-menu-item>
         )
       }
@@ -100,7 +105,7 @@ const menu = () => (
     width: 200px;
     .el-menu {
       .el-menu-item {
-        margin: 0 14px;
+        margin: 0 10px;
         border-radius: 4px;
       }
     }
@@ -115,6 +120,11 @@ const menu = () => (
       color: var(--el-menu-active-color);
     }
   }
+  .el-menu-item.is-active {
+    background-color: #2b3d47;
+  }
+}
+.sider-menu-popper {
   .el-menu-item.is-active {
     background-color: #2b3d47;
   }
