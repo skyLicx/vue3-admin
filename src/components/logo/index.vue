@@ -20,8 +20,7 @@ const isCollapse = computed(() => globalStore.isCollapse)
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 220px;
-  transition: all 0.28s;
+  width: 100%;
   .logo-img {
     width: 60px;
   }
@@ -31,7 +30,6 @@ const isCollapse = computed(() => globalStore.isCollapse)
   }
 }
 .logo.collapse {
-  width: 64px;
   .title {
     display: none;
   }

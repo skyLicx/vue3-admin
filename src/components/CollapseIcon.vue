@@ -8,9 +8,27 @@
 
 <script setup lang="ts">
 import { useGlobalStore } from '@/store/modules/global'
+import { useDebounceFn } from '@vueuse/core'
+import { onBeforeUnmount, ref } from 'vue'
 
 const globalStore = useGlobalStore()
 const toggleCollapse = () => globalStore.setGlobalState('isCollapse', !globalStore.isCollapse)
+
+// 监听窗口大小变化，折叠侧边栏
+const screenWidth = ref(0)
+const listeningWindow = useDebounceFn(() => {
+  screenWidth.value = document.body.clientWidth
+  if (screenWidth.value < 1200) {
+    globalStore.setGlobalState('isCollapse', true)
+  }
+  if (screenWidth.value > 1200) {
+    globalStore.setGlobalState('isCollapse', false)
+  }
+}, 100)
+window.addEventListener('resize', listeningWindow, false)
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', listeningWindow)
+})
 </script>
 
 <style scoped lang="scss">

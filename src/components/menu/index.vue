@@ -93,6 +93,7 @@ const menu = () => (
     default-active={selectedKey.value}
     collapse={isCollapse.value}
     unique-opened={true}
+    collapse-transition={false}
   >
     {renderSubMenu()}
   </el-menu>
@@ -102,19 +103,20 @@ const menu = () => (
 <style lang="scss">
 .sider-menu-wrapper {
   border-right: none;
-  &:not(.el-menu--collapse) {
-    width: 220px;
-    .el-sub-menu__title {
-      margin: 0 10px;
-    }
-    .el-menu-item {
-      margin: 0 10px;
-      border-radius: 4px;
-    }
+  width: 100%;
+  .el-sub-menu__title {
+    margin: 0 10px;
+    border-radius: 4px;
+  }
+  .el-menu-item {
+    margin: 0 10px;
+    border-radius: 4px;
   }
   &.el-menu--collapse {
     .el-sub-menu.is-active {
-      background-color: $side-menu-active-bg-color;
+      .el-sub-menu__title {
+        background-color: $side-menu-active-bg-color;
+      }
     }
   }
   .el-sub-menu.is-active > .el-sub-menu__title {

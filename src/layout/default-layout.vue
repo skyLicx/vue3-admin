@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout">
-    <el-aside class="layout-sider">
+    <el-aside class="layout-sider" :style="{ width: isCollapse ? '84px' : '220px' }">
       <Logo />
       <el-scrollbar class="menu-scroll">
         <Menu />
@@ -31,6 +31,7 @@ import PageLayout from './page-layout.vue'
 import { computed } from 'vue'
 import { useGlobalStore } from '@/store/modules/global'
 const globalStore = useGlobalStore()
+const isCollapse = computed(() => globalStore.isCollapse)
 const showFooter = computed(() => globalStore.showFooter)
 </script>
 
@@ -41,9 +42,11 @@ const showFooter = computed(() => globalStore.showFooter)
   position: relative;
   .layout-sider {
     width: auto;
+    overflow-x: hidden;
     background-color: $side-bg-color;
     display: flex;
     flex-direction: column;
+    transition: width 0.3s ease;
   }
   .layout-header {
     padding: 0;
