@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tabs-box">
     <el-tabs
       v-model="activeName"
       type="card"
@@ -56,9 +56,31 @@ const removeTab = (key: string) => {
 </script>
 
 <style lang="scss">
-.tabs {
-  .el-tabs__header {
-    margin: 0;
+.tabs-box {
+  .tabs {
+    .el-tabs__header {
+      box-sizing: border-box;
+      height: 40px;
+      padding: 0 10px;
+      margin: 0;
+      .el-tabs__nav {
+        border: none;
+      }
+      .el-tabs__item {
+        border: none;
+        &.is-active {
+          color: var(--el-color-primary);
+          &::before {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            content: '';
+            border-bottom: 2px solid var(--el-color-primary);
+          }
+        }
+      }
+    }
   }
 }
 </style>
