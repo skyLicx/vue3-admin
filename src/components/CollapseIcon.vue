@@ -33,15 +33,21 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .collapse {
-  padding: 12px;
   width: 100%;
-  text-align: center;
-  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px;
 }
 .collapse-icon {
-  font-size: 22px;
-  color: var(--el-header-text-color);
+  font-size: 38px;
+  padding: 8px;
   cursor: pointer;
   color: #fff;
+  border-radius: 4px;
+  &:hover {
+    color: var(--el-menu-active-color);
+    background-color: #2b3d47;
+  }
 }
 </style>
