@@ -11,7 +11,7 @@ import { useRouter, type RouteMeta, type RouteRecordRaw } from 'vue-router'
 import { openWindow } from '@/utils'
 import { useUserStore } from '@/store'
 import { useGlobalStore } from '@/store/modules/global'
-
+import { transformI18n } from '@/hooks/useLocale'
 const router = useRouter()
 const userStore = useUserStore()
 const globalStore = useGlobalStore()

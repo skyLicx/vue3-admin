@@ -33,9 +33,11 @@ const logout = () => {
 .avatar-box {
   display: flex;
   align-items: center;
-  cursor: pointer;
   .name {
     padding: 0 10px;
+  }
+  .el-avatar {
+    cursor: pointer;
   }
 }
 </style>

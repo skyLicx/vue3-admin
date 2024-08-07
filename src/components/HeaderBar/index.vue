@@ -1,11 +1,17 @@
 <template>
   <div class="header-bar-container">
+    <div class="tools">
+      <el-space>
+        <Language />
+      </el-space>
+    </div>
     <Avatar />
   </div>
 </template>
 
 <script lang="ts" setup>
 import Avatar from './Avatar.vue'
+import Language from './Language.vue'
 defineOptions({
   name: 'HeaderBar'
 })

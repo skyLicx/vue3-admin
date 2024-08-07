@@ -18,7 +18,7 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
-import useLoading from '@/hooks/loading'
+import useLoading from '@/hooks/useLoading'
 import { ElMessage } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 
