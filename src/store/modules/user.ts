@@ -3,6 +3,9 @@ import Api from '@/api/'
 import { ref } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { generateDynamicRoutes } from '@/router/routerHelper'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import router from '@/router'
+import { useTabsViewStore } from './useTabsViewStore'
 
 const useUserStore = defineStore(
   'user',
@@ -22,7 +25,6 @@ const useUserStore = defineStore(
         setToken(data.token)
         await fetchMenus()
       } catch (error) {
-        console.log(error, 'error')
         return Promise.reject(error)
       }
     }
@@ -148,12 +150,35 @@ const useUserStore = defineStore(
         return Promise.reject(error)
       }
     }
+    const reset = () => {
+      const tabsViewStore = useTabsViewStore()
+      tabsViewStore.tabsList = []
+      token.value = ''
+      menus.value = []
+      userInfo.value = {}
+      setTimeout(() => {
+        localStorage.clear()
+      })
+      router.replace('/login')
+    }
+    const logout = () => {
+      ElMessageBox.confirm('您是否确认退出登录?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        draggable: true,
+        type: 'warning'
+      }).then(async () => {
+        reset()
+        ElMessage.success('退出登录成功！')
+      })
+    }
 
     return {
       token,
       userInfo,
       menus,
       login,
+      logout,
       fetchMenus
     }
   },

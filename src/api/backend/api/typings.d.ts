@@ -1,10 +1,12 @@
 declare namespace API {
   interface UserInfo {
+    id: number
     userName: string
+    avatar: string
     token: string
   }
   interface LoginDto {
-    username: string
+    userName: string
     password: string
   }
 

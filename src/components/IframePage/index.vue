@@ -7,7 +7,7 @@
 import { ref } from 'vue'
 
 defineOptions({
-  name: 'IFramePage'
+  name: 'IframePage'
 })
 
 defineProps({

@@ -9,6 +9,7 @@
     </el-aside>
     <el-container>
       <el-header class="layout-header">
+        <HeaderBar />
         <Tabs />
       </el-header>
       <el-main class="layout-main">
@@ -22,10 +23,11 @@
 </template>
 
 <script lang="ts" setup>
-import Logo from '@/components/logo/index.vue'
-import Footer from '@/components/footer/index.vue'
-import Menu from '@/components/menu/index.vue'
-import Tabs from '@/components/tabs/index.vue'
+import Logo from '@/components/Logo/index.vue'
+import Footer from '@/components/Footer/index.vue'
+import Menu from '@/components/Menu/index.vue'
+import Tabs from '@/components/Tabs/index.vue'
+import HeaderBar from '@/components/HeaderBar/index.vue'
 import CollapseIcon from '@/components/CollapseIcon.vue'
 import PageLayout from './page-layout.vue'
 import { computed } from 'vue'

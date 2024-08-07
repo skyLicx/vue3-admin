@@ -1,8 +1,8 @@
 <template>
   <div class="login-form-wrapper">
     <el-form ref="formRef" class="login-form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="form.username"></el-input>
+      <el-form-item label="用户名" prop="userName">
+        <el-input v-model="form.userName"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="form.password" type="password" autocomplete="off"></el-input>
@@ -29,12 +29,12 @@ const { loading, setLoading } = useLoading()
 
 const formRef = ref<FormInstance>()
 const form = ref<API.LoginDto>({
-  username: 'admin',
+  userName: 'admin',
   password: '123456'
 })
 
 const rules = ref<FormRules<typeof form>>({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  userName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
@@ -61,8 +61,7 @@ const login = async () => {
 
 <style lang="scss" scoped>
 .login-form-wrapper {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 15px;
+  padding: 40px;
+  background-color: rgba($color: #fff, $alpha: 0.3);
 }
 </style>

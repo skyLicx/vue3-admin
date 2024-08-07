@@ -4,18 +4,19 @@ import { serverApi, successResponseWrap, failResponseWrap } from './_util'
 export const handlers = [
   http.post(serverApi('/login'), async ({ request }) => {
     await delay(100)
-    const { username, password } = (await request.json()) as any
-    if (!username) {
+    const { userName, password } = (await request.json()) as any
+    if (!userName) {
       return HttpResponse.json(failResponseWrap(null, '用户名不能为空'))
     }
     if (!password) {
       return HttpResponse.json(failResponseWrap(null, '密码不能为空'))
     }
-    if (username === 'admin' && password === '123456') {
+    if (userName === 'admin' && password === '123456') {
       return HttpResponse.json(
         successResponseWrap({
           id: 1,
-          username: 'admin',
+          userName: 'admin',
+          avatar: '',
           token: 'tokenxxxxx'
         })
       )

@@ -83,7 +83,7 @@ export const useTabsViewStore = defineStore(
   },
   {
     persist: {
-      paths: ['tabsList']
+      paths: []
     }
   }
 )
