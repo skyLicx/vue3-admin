@@ -4,15 +4,15 @@
       v-model="activeName"
       type="card"
       class="tabs"
-      closable
       @tab-remove="removeTab"
       @tab-click="clickTab"
     >
       <el-tab-pane
         v-for="tabItem in tabsList"
-        :key="tabItem.fullPath"
+        :key="tabItem.fullPath || tabItem.path"
         :label="tabItem.meta.title"
-        :name="tabItem.fullPath"
+        :name="tabItem.fullPath || tabItem.path"
+        :closable="!tabItem.meta.affix"
       ></el-tab-pane>
     </el-tabs>
   </div>
@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import { useTabsViewStore } from '@/store/modules/tabs'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { ElMessage, type TabsPaneContext } from 'element-plus'
 
 defineOptions({
@@ -36,7 +36,7 @@ const tabsList = computed(() => {
 
 const activeName = computed({
   get: () => {
-    return tabsViewStore.getCurrentTab?.fullPath || ''
+    return tabsViewStore.getCurrentTab?.fullPath || tabsViewStore.getCurrentTab?.path || ''
   },
   set: () => {}
 })
@@ -46,13 +46,17 @@ const clickTab = (tab: TabsPaneContext) => {
 }
 
 // 移除标签
-const removeTab = (key: string) => {
+const removeTab = (fullPath: string) => {
   if (tabsList.value.length === 1) {
     return ElMessage.warning('这已经是最后一页，不能再关闭了！')
   }
-  const removeRoute = tabsList.value.find((item) => item.fullPath === key)
+  const removeRoute = tabsList.value.find((item) => item.fullPath === fullPath)
   tabsViewStore.closeCurrentTab(removeRoute!)
 }
+
+onMounted(() => {
+  tabsViewStore.addAffixTabs()
+})
 </script>
 
 <style lang="scss">

@@ -27,7 +27,9 @@ export const useTabsViewStore = defineStore(
     /** 当前activity tab */
     const getCurrentTab = computed(() => {
       return tabsList.value.find((item) => {
-        return item && !isInRouteExcludes(item) && item.fullPath === currentRoute.fullPath
+        return (
+          item && !isInRouteExcludes(item) && (item.fullPath || item.path) === currentRoute.fullPath
+        )
       })
     })
 
@@ -46,7 +48,9 @@ export const useTabsViewStore = defineStore(
       if (isInRouteExcludes(route)) {
         return false
       }
-      const isExists = tabsList.value.some((item) => item.fullPath == route.fullPath)
+      const isExists = tabsList.value.some(
+        (item) => (item.fullPath || item.path) == (route.fullPath || route.path)
+      )
       if (!isExists) {
         tabsList.value.push(getRawRoute(route))
       }
@@ -64,6 +68,14 @@ export const useTabsViewStore = defineStore(
       }
     }
 
+    const addAffixTabs = () => {
+      router.getRoutes().forEach((route) => {
+        if (route.meta?.affix) {
+          addTabs({ ...route } as unknown as RouteLocationNormalizedLoaded)
+        }
+      })
+    }
+
     watch(
       () => currentRoute.fullPath,
       () => {
@@ -77,7 +89,8 @@ export const useTabsViewStore = defineStore(
       getTabsList,
       getCurrentTab,
       addTabs,
-      closeCurrentTab
+      closeCurrentTab,
+      addAffixTabs
     }
   },
   {
