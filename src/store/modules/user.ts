@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import Api from '@/api/'
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { generateDynamicRoutes } from '@/router/routerHelper'
 import { ElMessage, ElMessageBox } from 'element-plus'
@@ -12,7 +12,7 @@ const useUserStore = defineStore(
   () => {
     const token = ref<string>()
     const userInfo = ref<Partial<API.UserInfo>>({})
-    const menus = ref<RouteRecordRaw[]>([])
+    const menus: Ref<RouteRecordRaw[]> = ref([])
 
     const setToken = (_token: string) => {
       token.value = _token
@@ -123,7 +123,8 @@ const useUserStore = defineStore(
                     title: '角色管理',
                     icon: 'Menu',
                     type: 1,
-                    orderNo: 1
+                    orderNo: 1,
+                    hideInTabs: true
                   }
                 },
                 {
@@ -145,7 +146,7 @@ const useUserStore = defineStore(
         /** 不调用接口直接为本地路由 */
         // const data = []
         const result = generateDynamicRoutes(data as unknown as RouteRecordRaw[])
-        menus.value = result
+        menus.value = result.sort((a, b) => ~~Number(a.meta?.orderNo) - ~~Number(b.meta?.orderNo))
       } catch (error) {
         return Promise.reject(error)
       }

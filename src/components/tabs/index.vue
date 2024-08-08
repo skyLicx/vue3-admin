@@ -36,7 +36,7 @@ const tabsList = computed(() => {
 
 const activeName = computed({
   get: () => {
-    return tabsViewStore.getCurrentTab?.fullPath
+    return tabsViewStore.getCurrentTab?.fullPath || ''
   },
   set: () => {}
 })

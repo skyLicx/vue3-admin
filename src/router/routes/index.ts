@@ -4,7 +4,7 @@ import { LOGIN_NAME } from '../constant'
 export const rootRoute: RouteRecordRaw = {
   path: '/',
   name: 'Layout',
-  redirect: '/dashboard/workbench',
+  redirect: '/home',
   component: DEFAULT_LAYOUT,
   meta: {
     title: '根路由'

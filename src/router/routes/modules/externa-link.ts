@@ -9,7 +9,8 @@ const EXTERNALINK: Array<RouteRecordRaw> = [
       title: 'element-plus',
       icon: 'Link',
       isExt: true,
-      extOpenMode: 1
+      extOpenMode: 1,
+      orderNo: 1
     }
   }
 ]
