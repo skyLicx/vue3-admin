@@ -34,7 +34,7 @@ export const useTabsViewStore = defineStore(
     const getRawRoute = (route: RouteLocationNormalizedLoaded): RouteLocationNormalizedLoaded => {
       return {
         ...route,
-        matched: route.matched.map((item) => {
+        matched: route.matched?.map((item) => {
           const { meta, path, name } = item
           return { meta, path, name }
         }) as RouteLocationMatched[]
@@ -60,7 +60,6 @@ export const useTabsViewStore = defineStore(
       // 如果关闭的tab就是当前激活的tab，则重定向页面
       if (isDelCurrentTab) {
         const currentRoute = tabsList.value[Math.max(0, tabsList.value.length - 1)]
-        console.log(tabsList.value, 'tabsList.value')
         router.push(currentRoute)
       }
     }

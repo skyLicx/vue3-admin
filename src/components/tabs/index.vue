@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useTabsViewStore } from '@/store/modules/useTabsViewStore'
+import { useTabsViewStore } from '@/store/modules/tabs'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import { ElMessage, type TabsPaneContext } from 'element-plus'

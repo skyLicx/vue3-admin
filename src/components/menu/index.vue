@@ -11,7 +11,6 @@ import { useRouter, type RouteMeta, type RouteRecordRaw } from 'vue-router'
 import { openWindow } from '@/utils'
 import { useUserStore } from '@/store'
 import { useGlobalStore } from '@/store/modules/global'
-import { transformI18n } from '@/hooks/useLocale'
 const router = useRouter()
 const userStore = useUserStore()
 const globalStore = useGlobalStore()
@@ -57,7 +56,7 @@ const renderSubMenu = () => {
   function travel(routes: RouteRecordRaw[], nodes: VNode[] = []) {
     routes.forEach((route) => {
       let node: VNode
-      if (route.children?.length) {
+      if (route.children?.length && !route.meta?.hideChildrenInMenu) {
         node = (
           <el-sub-menu
             index={route.name}

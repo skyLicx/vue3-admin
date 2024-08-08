@@ -5,7 +5,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { generateDynamicRoutes } from '@/router/routerHelper'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import router from '@/router'
-import { useTabsViewStore } from './useTabsViewStore'
+import { useTabsViewStore } from './tabs'
 
 const useUserStore = defineStore(
   'user',
@@ -13,7 +13,17 @@ const useUserStore = defineStore(
     const token = ref<string>()
     const userInfo = ref<Partial<API.UserInfo>>({})
     const menus: Ref<RouteRecordRaw[]> = ref([])
-
+    const sortMenus = (menus: RouteRecordRaw[] = []) => {
+      return menus
+        .filter((n) => {
+          const flag = !n.meta?.hideInMenu
+          if (flag && n.children?.length) {
+            n.children = sortMenus(n.children)
+          }
+          return flag
+        })
+        .sort((a, b) => ~~Number(a.meta?.orderNo) - ~~Number(b.meta?.orderNo))
+    }
     const setToken = (_token: string) => {
       token.value = _token
     }
@@ -110,7 +120,8 @@ const useUserStore = defineStore(
                     title: '用户管理',
                     icon: 'Menu',
                     type: 1,
-                    orderNo: 0
+                    orderNo: 0,
+                    affix: true
                   }
                 },
                 {
@@ -136,7 +147,8 @@ const useUserStore = defineStore(
                     title: '菜单管理',
                     icon: 'Menu',
                     type: 1,
-                    orderNo: 2
+                    orderNo: 2,
+                    hideInMenu: true
                   }
                 }
               ]
@@ -146,7 +158,7 @@ const useUserStore = defineStore(
         /** 不调用接口直接为本地路由 */
         // const data = []
         const result = generateDynamicRoutes(data as unknown as RouteRecordRaw[])
-        menus.value = result.sort((a, b) => ~~Number(a.meta?.orderNo) - ~~Number(b.meta?.orderNo))
+        menus.value = sortMenus(result)
       } catch (error) {
         return Promise.reject(error)
       }
