@@ -65,29 +65,7 @@ export const transformMenuToRoutes = (
 export const generateDynamicRoutes = (dynamicRoutes: RouteRecordRaw[]) => {
   const routes = [...routeModules, ...transformMenuToRoutes(dynamicRoutes)]
   const allRoute = [...routes, ...base]
-  // genNamePathForRoutes(allRoute)
   rootRoute.children = allRoute
   router.addRoute(rootRoute)
   return routes
-}
-
-/**
- * 主要方便于设置 a-menu 的 open-keys，即控制左侧菜单应当展开哪些菜单
- * @param {RouteRecordRaw[]} routes 需要添加 namePath 的路由
- * @param {string[]} namePath
- */
-export const genNamePathForRoutes = (routes: RouteRecordRaw[], parentNamePath: string[] = []) => {
-  routes.forEach((item) => {
-    if (item.meta && typeof item.name === 'string') {
-      item.meta.namePath = parentNamePath.concat(item.name)
-
-      if (item.meta?.hideInMenu) {
-        item.meta.activeMenu ||= parentNamePath.at(-1)
-      }
-
-      if (item.children?.length) {
-        genNamePathForRoutes(item.children, item.meta.namePath)
-      }
-    }
-  })
 }
