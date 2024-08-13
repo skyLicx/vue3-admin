@@ -2,7 +2,8 @@ import axios from 'axios'
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { isString } from 'lodash-es'
 import { stringify } from 'qs'
-import { ElMessage } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
+import { ref } from 'vue'
 
 export interface BaseResponse<T = any> {
   message: string
@@ -21,9 +22,26 @@ export interface RequestOptions extends AxiosRequestConfig {
   /** 失败时，是否显示后端返回的失败信息 */
   showErrorMsg?: boolean
   requestType?: 'json' | 'form'
+  /** 是否显示loading */
+  showLoading?: boolean
 }
 
 export const baseApiUrl = import.meta.env.VITE_BASE_API_URL || '/'
+
+const loading = ref()
+const startLoading = () => {
+  if (!loading.value) {
+    loading.value = ElLoading.service({
+      lock: true,
+      text: 'Loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
+  }
+}
+const stopLoading = () => {
+  loading.value?.close()
+  loading.value = null
+}
 
 const service = axios.create({
   baseURL: baseApiUrl,
@@ -46,7 +64,6 @@ service.interceptors.response.use(
   (response: AxiosResponse<BaseResponse>) => {
     const res = response.data
     if (res.code && res.code !== 200) {
-      ElMessage.error(res.message || 'Error')
       return Promise.reject(new Error(res.message || 'Error'))
     }
     return response
@@ -77,7 +94,10 @@ export async function request(_url: string | RequestOptions, _config: RequestOpt
   const config = isString(_url) ? _config : _url
   try {
     // 兼容 from data 文件上传的情况
-    const { requestType, isReturnResult = true, ...rest } = config
+    const { requestType, isReturnResult = true, showLoading, ...rest } = config
+    if (showLoading) {
+      startLoading()
+    }
 
     const response = (await service.request({
       url,
@@ -108,6 +128,12 @@ export async function request(_url: string | RequestOptions, _config: RequestOpt
       return data.data
     }
   } catch (error: any) {
+    const { showErrorMsg = true, errorMsg } = config
+    if (showErrorMsg) {
+      ElMessage.error(errorMsg || error.message || '请求失败')
+    }
     return Promise.reject(error)
+  } finally {
+    stopLoading()
   }
 }

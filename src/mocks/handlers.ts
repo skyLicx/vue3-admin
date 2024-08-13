@@ -1,5 +1,22 @@
 import { delay, http, HttpResponse } from 'msw'
 import { serverApi, successResponseWrap, failResponseWrap } from './_util'
+import Mock from 'mockjs'
+const Random = Mock.Random
+const tableList: any = []
+for (let i = 0; i < 100; i++) {
+  const newObject = {
+    id: Random.guid(), // 获取全局唯一标识符
+    title: Random.csentence(5, 10), //  Random.csentence( min, max )
+    name: Random.cname(), // Random.cname() 随机生成一个常见的中文姓名
+    score: Random.float(1, 100), // 随机生成1-100的浮点数
+    stars: Random.natural(1, 5), // 随机生成1-5的数字
+    url: Random.url(), // 生成web地址
+    city: Random.city(), // 随机生成一个城市
+    date: Random.date() // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd
+    // date: Random.date() + ' ' + Random.time() // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；Random.time() 返回一个随机的时间字符串
+  }
+  tableList.push(newObject)
+}
 
 export const handlers = [
   http.post(serverApi('/login'), async ({ request }) => {
@@ -136,5 +153,33 @@ export const handlers = [
       }
     ]
     return HttpResponse.json(successResponseWrap(data))
+  }),
+  http.post(serverApi('/pageList'), async ({ request }) => {
+    await delay(1000)
+    const { pageNum = 1, pageSize = 10 } = (await request.json()) as any
+    const total = tableList.length
+    const newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)
+    return HttpResponse.json(
+      successResponseWrap({
+        total: total,
+        list: newProduceNewsData,
+        pageNum: pageNum,
+        pageSize: pageSize
+      })
+    )
+  }),
+  http.post(serverApi('/pageList2'), async ({ request }) => {
+    await delay(600)
+    const { pageNum = 1, pageSize = 10 } = (await request.json()) as any
+    const total = tableList.length
+    const newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)
+    return HttpResponse.json(
+      successResponseWrap({
+        total: total,
+        list: newProduceNewsData,
+        pageNum: pageNum,
+        pageSize: pageSize
+      })
+    )
   })
 ]
