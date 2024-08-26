@@ -15,7 +15,7 @@ const routes: RouteRecordRaw = {
       path: 'about',
       name: `${moduleName}-about`,
       component: () => import('@/views/account/about.vue'),
-      meta: { title: '关于', icon: 'Menu', affix: true }
+      meta: { title: '关于', icon: 'Menu' }
     },
     {
       path: 'settings',

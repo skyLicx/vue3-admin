@@ -120,8 +120,7 @@ const useUserStore = defineStore(
                     title: '用户管理',
                     icon: 'Menu',
                     type: 1,
-                    orderNo: 0,
-                    affix: true
+                    orderNo: 0
                   }
                 },
                 {

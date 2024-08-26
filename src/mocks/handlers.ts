@@ -155,7 +155,7 @@ export const handlers = [
     return HttpResponse.json(successResponseWrap(data))
   }),
   http.post(serverApi('/pageList'), async ({ request }) => {
-    await delay(1000)
+    await delay(300)
     const { pageNum = 1, pageSize = 10 } = (await request.json()) as any
     const total = tableList.length
     const newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)
@@ -169,7 +169,7 @@ export const handlers = [
     )
   }),
   http.post(serverApi('/pageList2'), async ({ request }) => {
-    await delay(600)
+    await delay(2000)
     const { pageNum = 1, pageSize = 10 } = (await request.json()) as any
     const total = tableList.length
     const newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)

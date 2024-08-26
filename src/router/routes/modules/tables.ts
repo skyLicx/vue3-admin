@@ -15,7 +15,7 @@ const routes: RouteRecordRaw = {
       path: 'example',
       name: `${moduleName}-example`,
       component: () => import('@/views/tables/example.vue'),
-      meta: { title: '基础', icon: 'Menu' }
+      meta: { title: '例子', icon: 'Menu' }
     }
   ]
 }

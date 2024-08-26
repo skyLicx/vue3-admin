@@ -29,7 +29,9 @@ export interface RequestOptions extends AxiosRequestConfig {
 export const baseApiUrl = import.meta.env.VITE_BASE_API_URL || '/'
 
 const loading = ref()
+let loadingCount = 0
 const startLoading = () => {
+  loadingCount++
   if (!loading.value) {
     loading.value = ElLoading.service({
       lock: true,
@@ -39,8 +41,11 @@ const startLoading = () => {
   }
 }
 const stopLoading = () => {
-  loading.value?.close()
-  loading.value = null
+  loadingCount--
+  if (loadingCount === 0) {
+    loading.value?.close()
+    loading.value = null
+  }
 }
 
 const service = axios.create({
@@ -92,9 +97,10 @@ export function request<T = any>(config: RequestOptions): Promise<BaseResponse<T
 export async function request(_url: string | RequestOptions, _config: RequestOptions = {}) {
   const url = isString(_url) ? _url : _url.url
   const config = isString(_url) ? _config : _url
+  const { showLoading } = config
   try {
     // 兼容 from data 文件上传的情况
-    const { requestType, isReturnResult = true, showLoading, ...rest } = config
+    const { requestType, isReturnResult = true, ...rest } = config
     if (showLoading) {
       startLoading()
     }
@@ -134,6 +140,8 @@ export async function request(_url: string | RequestOptions, _config: RequestOpt
     }
     return Promise.reject(error)
   } finally {
-    stopLoading()
+    if (showLoading) {
+      stopLoading()
+    }
   }
 }

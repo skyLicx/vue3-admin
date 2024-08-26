@@ -9,7 +9,8 @@ const DASHBOARD: RouteRecordRaw = {
   meta: {
     title: '首页',
     icon: 'House',
-    orderNo: -1
+    orderNo: -1,
+    affix: true
   }
 }
 
