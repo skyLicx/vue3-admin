@@ -1,5 +1,40 @@
 <template>
   <div>
+    <el-form class="search-form" ref="searchFormRef" :model="searchForm" label-width="auto">
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-form-item label="Title" prop="title">
+            <el-input v-model="searchForm.title" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="City" prop="city">
+            <el-input v-model="searchForm.city" />
+          </el-form-item>
+        </el-col>
+        <!-- <el-col :span="6">
+          <el-form-item label="Title">
+            <el-input v-model="searchForm.title" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Title">
+            <el-input v-model="searchForm.title" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="Title">
+            <el-input v-model="searchForm.title" />
+          </el-form-item>
+        </el-col> -->
+        <el-col style="flex: 1">
+          <div class="operation">
+            <el-button type="primary" @click="onSearch"> 搜索 </el-button>
+            <el-button @click="onReset"> 重置 </el-button>
+          </div>
+        </el-col>
+      </el-row>
+    </el-form>
     <el-table :data="tableData" v-table-adaptive style="width: 100%">
       <el-table-column prop="id" label="Id" width="180" />
       <el-table-column prop="title" label="Title" width="180" />
@@ -9,6 +44,12 @@
       <el-table-column prop="url" label="Url" />
       <el-table-column prop="city" label="City" />
       <el-table-column prop="date" label="Date" />
+      <el-table-column fixed="right" label="Operations" min-width="160">
+        <template #default="scope">
+          <el-button type="primary" @click="openExampleDialog('查看', scope.row)">View</el-button>
+          <el-button type="primary" @click="openExampleDialog('编辑', scope.row)">Edit</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       class="pagination-box"
@@ -20,6 +61,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
+    <ExampleDialog ref="exampleDialog" />
   </div>
 </template>
 
@@ -27,12 +69,20 @@
 import Api from '@/api'
 import type { Tables } from '@/api/interface'
 import { ref } from 'vue'
+import ExampleDialog from './components/ExampleDialog.vue'
+import type { FormInstance } from 'element-plus'
 
 const tableData = ref<Tables.PageItem[]>([])
 const pagination = ref({
   pageNum: 1,
   pageSize: 10,
   total: 0
+})
+
+const searchFormRef = ref<FormInstance>()
+const searchForm = ref({
+  title: '',
+  city: ''
 })
 const getPageList = async (params = {}) => {
   const queryData = {
@@ -45,6 +95,16 @@ const getPageList = async (params = {}) => {
   pagination.value.total = data.total
 }
 
+const onSearch = () => {
+  pagination.value.pageNum = 1
+  getPageList(searchForm.value)
+}
+
+const onReset = () => {
+  searchFormRef.value?.resetFields()
+  onSearch()
+}
+
 const handleSizeChange = () => {
   pagination.value.pageNum = 1
   getPageList()
@@ -54,8 +114,26 @@ const handleCurrentChange = () => {
   getPageList()
 }
 getPageList()
+
+const exampleDialog = ref<InstanceType<typeof ExampleDialog> | null>(null)
+const openExampleDialog = (title: string, row: Partial<Tables.PageItem> = {}) => {
+  exampleDialog.value?.open({
+    title,
+    isView: title === '查看',
+    detailInfo: row
+  })
+}
 </script>
 <style lang="scss" scoped>
+.search-form {
+  background-color: #fff;
+  padding: 20px;
+}
+.operation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .pagination-box {
   margin-top: 20px;
   justify-content: flex-end;
