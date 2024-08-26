@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" height="400" style="width: 100%">
+    <el-table :data="tableData" v-table-adaptive style="width: 100%">
       <el-table-column prop="id" label="Id" width="180" />
       <el-table-column prop="title" label="Title" width="180" />
       <el-table-column prop="name" label="Name" />

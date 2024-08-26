@@ -9,6 +9,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import '@/api/request'
 import store from './store'
 import i18n from './locales'
+import directives from './directives/index'
 if (import.meta.env.VITE_MOCK_IN_PROD === 'true') {
   const { setupMock } = await import('./mocks/browser')
   setupMock.start({
@@ -26,6 +27,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(store)
 app.use(ElementPlus)
 app.use(i18n)
+app.use(directives)
 async function setupApp() {
   await setupRouter(app)
   app.mount('#app')
