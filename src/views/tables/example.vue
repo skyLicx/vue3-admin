@@ -9,24 +9,16 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="City" prop="city">
-            <el-input v-model="searchForm.city" />
+            <el-select v-model="searchForm.city" placeholder="Select" clearable>
+              <el-option
+                v-for="item in cityOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
           </el-form-item>
         </el-col>
-        <!-- <el-col :span="6">
-          <el-form-item label="Title">
-            <el-input v-model="searchForm.title" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Title">
-            <el-input v-model="searchForm.title" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="Title">
-            <el-input v-model="searchForm.title" />
-          </el-form-item>
-        </el-col> -->
         <el-col style="flex: 1">
           <div class="operation">
             <el-button type="primary" @click="onSearch"> 搜索 </el-button>
@@ -68,9 +60,15 @@
 <script lang="ts" setup>
 import Api from '@/api'
 import type { Tables } from '@/api/interface'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import ExampleDialog from './components/ExampleDialog.vue'
 import type { FormInstance } from 'element-plus'
+
+const cityOptions = ref()
+const getCityList = async () => {
+  const data = await Api.tables.cityList()
+  cityOptions.value = data
+}
 
 const tableData = ref<Tables.PageItem[]>([])
 const pagination = ref({
@@ -113,7 +111,6 @@ const handleSizeChange = () => {
 const handleCurrentChange = () => {
   getPageList()
 }
-getPageList()
 
 const exampleDialog = ref<InstanceType<typeof ExampleDialog> | null>(null)
 const openExampleDialog = (title: string, row: Partial<Tables.PageItem> = {}) => {
@@ -123,6 +120,11 @@ const openExampleDialog = (title: string, row: Partial<Tables.PageItem> = {}) =>
     detailInfo: row
   })
 }
+
+onMounted(() => {
+  getCityList()
+  getPageList()
+})
 </script>
 <style lang="scss" scoped>
 .search-form {

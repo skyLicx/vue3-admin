@@ -1,4 +1,8 @@
 declare namespace API {
+  interface Options {
+    label: string
+    value: any
+  }
   interface UserInfo {
     id: number
     userName: string

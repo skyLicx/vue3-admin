@@ -10,3 +10,11 @@ export function pageList(body: Tables.PageListReq, options?: RequestOptions) {
     })
   })
 }
+export function cityList(options?: RequestOptions) {
+  return request<API.Options>('/cityList', {
+    method: 'POST',
+    ...(options || {
+      showLoading: true
+    })
+  })
+}

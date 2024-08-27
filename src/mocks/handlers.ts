@@ -156,9 +156,21 @@ export const handlers = [
   }),
   http.post(serverApi('/pageList'), async ({ request }) => {
     await delay(300)
-    const { pageNum = 1, pageSize = 10 } = (await request.json()) as any
+    const { pageNum = 1, pageSize = 10, title, city } = (await request.json()) as any
     const total = tableList.length
-    const newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)
+    let newProduceNewsData = tableList.slice((pageNum - 1) * pageSize, pageNum * pageSize)
+    newProduceNewsData = newProduceNewsData.filter((item) => {
+      if (title) {
+        return item.title.includes(title)
+      }
+      return true
+    })
+    newProduceNewsData = newProduceNewsData.filter((item) => {
+      if (city) {
+        return item.city.includes(city)
+      }
+      return true
+    })
     return HttpResponse.json(
       successResponseWrap({
         total: total,
@@ -167,6 +179,18 @@ export const handlers = [
         pageSize: pageSize
       })
     )
+  }),
+  http.post(serverApi('/cityList'), async () => {
+    await delay(300)
+    let city = tableList.map((item) => item.city)
+    city = [...new Set(city)]
+    city = city.map((item) => {
+      return {
+        value: item,
+        label: item
+      }
+    })
+    return HttpResponse.json(successResponseWrap(city))
   }),
   http.post(serverApi('/pageList2'), async ({ request }) => {
     await delay(2000)
