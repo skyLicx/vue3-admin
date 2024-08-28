@@ -7,8 +7,13 @@ export namespace Test {
 }
 
 export namespace Tables {
-  export interface PageListReq extends ReqPage {}
-  export interface PageItem {
+  export interface UserListSearchForm {
+    title?: string
+    city?: string
+  }
+
+  export interface UserListReq extends UserListSearchForm, ReqPage {}
+  export interface UserItem {
     /** id */
     id: string
     /** 标题 */
@@ -20,10 +25,20 @@ export namespace Tables {
     city: string
     date: string
   }
-  export interface PageListRes {
-    list: PageItem[]
+  export interface UserListRes {
+    list: UserItem[]
     pageNum: number
     pageSize: number
     total: number
+  }
+  export interface UserInfo {
+    id: string
+    title: string
+    name: string
+    score: number
+    stars: number
+    url: string
+    city: string
+    date: string
   }
 }

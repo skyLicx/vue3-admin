@@ -3,7 +3,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { isString } from 'lodash-es'
 import { stringify } from 'qs'
 import { ElLoading, ElMessage } from 'element-plus'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 export interface BaseResponse<T = any> {
   message: string
@@ -33,10 +33,12 @@ let loadingCount = 0
 const startLoading = () => {
   loadingCount++
   if (!loading.value) {
-    loading.value = ElLoading.service({
-      lock: true,
-      text: 'Loading',
-      background: 'rgba(0, 0, 0, 0.7)'
+    nextTick(() => {
+      loading.value = ElLoading.service({
+        lock: true,
+        text: 'Loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
     })
   }
 }

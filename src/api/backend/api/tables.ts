@@ -1,20 +1,45 @@
 import { request, type RequestOptions } from '@/api/request'
 import type { Tables } from '@/api/interface/index'
 
-export function pageList(body: Tables.PageListReq, options?: RequestOptions) {
-  return request<Tables.PageListRes>('/pageList', {
+export function userList(body: Tables.UserListReq, options?: RequestOptions) {
+  return request<Tables.UserListRes>('/userList', {
     method: 'POST',
     data: body,
-    ...(options || {
-      showLoading: true
-    })
+    showLoading: true,
+    ...(options || {})
   })
 }
 export function cityList(options?: RequestOptions) {
   return request<API.Options>('/cityList', {
     method: 'POST',
-    ...(options || {
-      showLoading: true
-    })
+    showLoading: true,
+    ...(options || {})
+  })
+}
+
+export function userInfo(body: { id: string }, options?: RequestOptions) {
+  return request<Tables.UserInfo>('/userInfo', {
+    method: 'POST',
+    data: body,
+    showLoading: true,
+    ...(options || {})
+  })
+}
+
+export function userAdd(body: any, options?: RequestOptions) {
+  return request<any>('/userAdd', {
+    method: 'POST',
+    data: body,
+    showLoading: true,
+    ...(options || {})
+  })
+}
+
+export function userEdit(body: any, options?: RequestOptions) {
+  return request<any>('/userEdit', {
+    method: 'POST',
+    data: body,
+    showLoading: true,
+    ...(options || {})
   })
 }

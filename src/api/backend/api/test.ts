@@ -1,8 +1,8 @@
 import { request, type RequestOptions } from '@/api/request'
 import type { Test } from '@/api/interface/index'
 
-export function pageList(body: Test.PageListReq, options?: RequestOptions) {
-  return request('/pageList', {
+export function userList(body: Test.PageListReq, options?: RequestOptions) {
+  return request('/userList', {
     method: 'POST',
     data: body,
     ...(options || {

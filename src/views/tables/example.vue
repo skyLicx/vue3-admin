@@ -27,6 +27,9 @@
         </el-col>
       </el-row>
     </el-form>
+    <div class="tools-box">
+      <el-button type="primary" @click="openExampleDialog('新增')">新增</el-button>
+    </div>
     <el-table :data="tableData" v-table-adaptive style="width: 100%">
       <el-table-column prop="id" label="Id" width="180" />
       <el-table-column prop="title" label="Title" width="180" />
@@ -70,7 +73,7 @@ const getCityList = async () => {
   cityOptions.value = data
 }
 
-const tableData = ref<Tables.PageItem[]>([])
+const tableData = ref<Tables.UserItem[]>([])
 const pagination = ref({
   pageNum: 1,
   pageSize: 10,
@@ -78,24 +81,24 @@ const pagination = ref({
 })
 
 const searchFormRef = ref<FormInstance>()
-const searchForm = ref({
+const searchForm = ref<Tables.UserListSearchForm>({
   title: '',
   city: ''
 })
-const getPageList = async (params = {}) => {
-  const queryData = {
+const getPageList = async () => {
+  const queryData: Tables.UserListReq = {
     pageNum: pagination.value.pageNum,
     pageSize: pagination.value.pageSize,
-    ...params
+    ...searchForm.value
   }
-  const data = await Api.tables.pageList(queryData)
+  const data = await Api.tables.userList(queryData)
   tableData.value = data.list
   pagination.value.total = data.total
 }
 
 const onSearch = () => {
   pagination.value.pageNum = 1
-  getPageList(searchForm.value)
+  getPageList()
 }
 
 const onReset = () => {
@@ -113,11 +116,11 @@ const handleCurrentChange = () => {
 }
 
 const exampleDialog = ref<InstanceType<typeof ExampleDialog> | null>(null)
-const openExampleDialog = (title: string, row: Partial<Tables.PageItem> = {}) => {
+const openExampleDialog = (title: string, row: Partial<Tables.UserItem> = {}) => {
   exampleDialog.value?.open({
     title,
     isView: title === '查看',
-    detailInfo: row
+    row: row
   })
 }
 
@@ -129,12 +132,16 @@ onMounted(() => {
 <style lang="scss" scoped>
 .search-form {
   background-color: #fff;
-  padding: 20px;
+  padding: 20px 20px 0;
+  .operation {
+    display: flex;
+    align-items: center;
+  }
 }
-.operation {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+
+.tools-box {
+  background-color: #fff;
+  padding: 20px;
 }
 .pagination-box {
   margin-top: 20px;

@@ -154,7 +154,7 @@ export const handlers = [
     ]
     return HttpResponse.json(successResponseWrap(data))
   }),
-  http.post(serverApi('/pageList'), async ({ request }) => {
+  http.post(serverApi('/userList'), async ({ request }) => {
     await delay(300)
     const { pageNum = 1, pageSize = 10, title, city } = (await request.json()) as any
     const total = tableList.length
@@ -191,6 +191,30 @@ export const handlers = [
       }
     })
     return HttpResponse.json(successResponseWrap(city))
+  }),
+  http.post(serverApi('/userInfo'), async ({ request }) => {
+    await delay(300)
+    const { id } = (await request.json()) as any
+    const userInfo = tableList.find((item) => item.id === id)
+    return HttpResponse.json(successResponseWrap(userInfo))
+  }),
+  http.post(serverApi('/userAdd'), async ({ request }) => {
+    await delay(300)
+    const form = (await request.json()) as any
+    tableList.unshift({
+      id: Random.guid(),
+      ...form
+    })
+    return HttpResponse.json(successResponseWrap(null))
+  }),
+  http.post(serverApi('/userEdit'), async ({ request }) => {
+    await delay(300)
+    const { id, ...form } = (await request.json()) as any
+    const userInfo = tableList.find((item) => item.id === id)
+    for (const key in form) {
+      userInfo[key] = form[key]
+    }
+    return HttpResponse.json(successResponseWrap(null))
   }),
   http.post(serverApi('/pageList2'), async ({ request }) => {
     await delay(2000)

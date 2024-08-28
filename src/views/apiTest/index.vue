@@ -9,7 +9,7 @@ import Api from '@/api/'
 
 const getPageList = async () => {
   try {
-    await Api.test.pageList({
+    await Api.test.userList({
       pageNum: 1,
       pageSize: 10
     })
