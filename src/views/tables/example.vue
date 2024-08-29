@@ -56,7 +56,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <ExampleDialog ref="exampleDialog" />
+    <ExampleDialog ref="exampleDialog" @reload="getPageList" />
   </div>
 </template>
 

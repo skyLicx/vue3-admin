@@ -57,6 +57,11 @@ const props = ref<Props>({
   isView: false,
   row: {}
 })
+
+const emit = defineEmits({
+  reload: null
+})
+
 const dialogVisible = ref(false)
 
 const cityOptions = ref()
@@ -115,6 +120,7 @@ const onConfirm = () => {
         await userAdd(form.value)
       }
       dialogVisible.value = false
+      emit('reload')
     } else {
       console.log('error submit!')
     }
