@@ -26,7 +26,7 @@ export function userInfo(body: { id: string }, options?: RequestOptions) {
   })
 }
 
-export function userAdd(body: any, options?: RequestOptions) {
+export function userAdd(body: Tables.UserForm, options?: RequestOptions) {
   return request<any>('/userAdd', {
     method: 'POST',
     data: body,
@@ -35,7 +35,7 @@ export function userAdd(body: any, options?: RequestOptions) {
   })
 }
 
-export function userEdit(body: any, options?: RequestOptions) {
+export function userEdit(body: Tables.UserForm, options?: RequestOptions) {
   return request<any>('/userEdit', {
     method: 'POST',
     data: body,

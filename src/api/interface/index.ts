@@ -41,4 +41,10 @@ export namespace Tables {
     city: string
     date: string
   }
+  export interface UserForm {
+    id?: string
+    name: string
+    city: string
+    stars?: number
+  }
 }

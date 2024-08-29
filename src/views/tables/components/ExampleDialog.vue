@@ -71,7 +71,7 @@ const getCityList = async () => {
 }
 
 const formRef = ref<FormInstance>()
-const form = ref({
+const form = ref<Tables.UserForm>({
   name: '',
   city: '',
   stars: undefined
@@ -88,14 +88,14 @@ const getDetailInfo = async (id: string) => {
   }
 }
 
-const userEdit = async (params) => {
+const userEdit = async (params: Tables.UserForm) => {
   await Api.tables.userEdit({
     id: props.value.row.id,
     ...params
   })
 }
 
-const userAdd = async (params) => {
+const userAdd = async (params: Tables.UserForm) => {
   await Api.tables.userAdd({
     ...params
   })
