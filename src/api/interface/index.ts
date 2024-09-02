@@ -10,9 +10,12 @@ export namespace Tables {
   export interface UserListSearchForm {
     title?: string
     city?: string
+    startDate?: string
+    endDate?: string
+    [key: string]: any
   }
 
-  export interface UserListReq extends UserListSearchForm, ReqPage {}
+  export type UserListReq = UserListSearchForm & ReqPage
   export interface UserItem {
     /** id */
     id: string
