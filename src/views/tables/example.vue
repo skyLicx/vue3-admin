@@ -74,6 +74,7 @@ import { onMounted, ref, watch } from 'vue'
 import ExampleDialog from './components/ExampleDialog.vue'
 import Pagination from '@/components/Pagination.vue'
 import type { FormInstance } from 'element-plus'
+import { BasePagination } from '@/config'
 
 const cityOptions = ref()
 const getCityList = async () => {
@@ -83,8 +84,7 @@ const getCityList = async () => {
 
 const tableData = ref<Tables.UserItem[]>([])
 const pagination = ref({
-  pageNum: 1,
-  pageSize: 10,
+  ...BasePagination,
   total: 0
 })
 
@@ -116,7 +116,6 @@ const getPageList = async () => {
     ...searchForm.value
   }
   delete queryData.dateRange
-  console.log('222')
   const data = await Api.tables.userList(queryData)
   tableData.value = data.list
   pagination.value.total = data.total
