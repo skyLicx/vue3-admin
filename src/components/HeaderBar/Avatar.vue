@@ -2,7 +2,10 @@
   <div class="avatar-box">
     <span class="name">{{ userName }}</span>
     <el-dropdown trigger="click">
-      <el-avatar :size="40" :src="userAvatar" />
+      <el-avatar
+        :size="40"
+        :src="userAvatar"
+      />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item>

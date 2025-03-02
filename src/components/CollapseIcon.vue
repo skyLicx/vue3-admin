@@ -1,6 +1,9 @@
 <template>
   <div class="collapse">
-    <el-icon class="collapse-icon" @click="toggleCollapse">
+    <el-icon
+      class="collapse-icon"
+      @click="toggleCollapse"
+    >
       <component :is="globalStore.isCollapse ? 'expand' : 'fold'"></component>
     </el-icon>
   </div>

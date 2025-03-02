@@ -1,6 +1,9 @@
 <template>
   <el-container class="layout">
-    <el-aside class="layout-sider" :style="{ width: isCollapse ? '84px' : '220px' }">
+    <el-aside
+      class="layout-sider"
+      :style="{ width: isCollapse ? '84px' : '220px' }"
+    >
       <Logo />
       <el-scrollbar class="menu-scroll">
         <Menu />
@@ -15,7 +18,10 @@
       <el-main class="layout-main">
         <PageLayout />
       </el-main>
-      <el-footer v-if="showFooter" class="layout-footer">
+      <el-footer
+        v-if="showFooter"
+        class="layout-footer"
+      >
         <Footer />
       </el-footer>
     </el-container>
@@ -23,10 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-import Logo from '@/components/Logo/index.vue'
-import Footer from '@/components/Footer/index.vue'
-import Menu from '@/components/Menu/index.vue'
-import Tabs from '@/components/Tabs/index.vue'
+import Logo from '@/components/logo/index.vue'
+import Footer from '@/components/footer/index.vue'
+import Menu from '@/components/menu/index.vue'
+import Tabs from '@/components/tabs/index.vue'
 import HeaderBar from '@/components/HeaderBar/index.vue'
 import CollapseIcon from '@/components/CollapseIcon.vue'
 import PageLayout from './page-layout.vue'

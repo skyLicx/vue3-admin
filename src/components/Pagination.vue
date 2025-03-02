@@ -1,5 +1,8 @@
 <template>
-  <div class="pagination-container" :style="{ display: isShow ? 'block' : 'none' }">
+  <div
+    class="pagination-container"
+    :style="{ display: isShow ? 'block' : 'none' }"
+  >
     <el-pagination
       class="pagination-box"
       :current-page="props.currentPage"

@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-button type="primary" @click="sendRequest">发送请求</el-button>
+    <el-button
+      type="primary"
+      @click="sendRequest"
+      >发送请求</el-button
+    >
   </div>
 </template>
 

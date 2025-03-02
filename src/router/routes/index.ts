@@ -22,5 +22,9 @@ export const basicRoutes: Array<RouteRecordRaw> = [
       title: '登录'
     }
   },
+  {
+    path: '/visualizing',
+    component: () => import('@/views/visualizing/index.vue')
+  },
   ...base
 ]

@@ -1,11 +1,25 @@
 <template>
   <div class="language-box">
-    <el-tooltip :content="$t('language')" placement="left">
-      <el-dropdown trigger="click" @command="changeLocale">
-        <img class="icon-language" src="@/assets/svg/icon-language.svg" alt="" />
+    <el-tooltip
+      :content="$t('language')"
+      placement="left"
+    >
+      <el-dropdown
+        trigger="click"
+        @command="changeLocale"
+      >
+        <img
+          class="icon-language"
+          src="@/assets/svg/icon-language.svg"
+          alt=""
+        />
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="item in locales" :key="item.value" :command="item.value">
+            <el-dropdown-item
+              v-for="item in locales"
+              :key="item.value"
+              :command="item.value"
+            >
               {{ item.label }}
             </el-dropdown-item>
           </el-dropdown-menu>

@@ -1,6 +1,13 @@
 <template>
-  <div class="logo" :class="{ collapse: isCollapse }">
-    <img class="logo-img" src="~@/assets/logo.png" alt="" />
+  <div
+    class="logo"
+    :class="{ collapse: isCollapse }"
+  >
+    <img
+      class="logo-img"
+      src="~@/assets/logo.png"
+      alt=""
+    />
     <span class="title">xxxx</span>
   </div>
 </template>

@@ -1,14 +1,36 @@
 <template>
   <div class="login-form-wrapper">
-    <el-form ref="formRef" class="login-form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="用户名" prop="userName">
+    <el-form
+      ref="formRef"
+      class="login-form"
+      :model="form"
+      :rules="rules"
+      label-width="80px"
+    >
+      <el-form-item
+        label="用户名"
+        prop="userName"
+      >
         <el-input v-model="form.userName"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input v-model="form.password" type="password" autocomplete="off"></el-input>
+      <el-form-item
+        label="密码"
+        prop="password"
+      >
+        <el-input
+          v-model="form.password"
+          type="password"
+          autocomplete="off"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" :loading="loading" @click="login"> login </el-button>
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="login"
+        >
+          login
+        </el-button>
       </el-form-item>
     </el-form>
   </div>

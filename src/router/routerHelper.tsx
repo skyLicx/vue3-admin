@@ -65,7 +65,12 @@ export const transformMenuToRoutes = (
 export const generateDynamicRoutes = (dynamicRoutes: RouteRecordRaw[]) => {
   const routes = [...routeModules, ...transformMenuToRoutes(dynamicRoutes)]
   const allRoute = [...routes, ...base]
-  rootRoute.children = allRoute
-  router.addRoute(rootRoute)
+  allRoute.forEach((route) => {
+    if (route.meta?.isFull) {
+      router.addRoute(route)
+    } else {
+      router.addRoute(rootRoute.name as string, route)
+    }
+  })
   return routes
 }

@@ -28,7 +28,11 @@ export function createRouterGuards(router: Router, whiteNameList: WhiteNameList)
         next()
       } else {
         // not login
-        next({ name: LOGIN_NAME, query: { redirect: to.fullPath }, replace: true })
+        next({
+          name: LOGIN_NAME,
+          query: { redirect: to.fullPath },
+          replace: true
+        })
       }
     }
   })

@@ -1,6 +1,14 @@
 <template>
-  <div class="iframe-box" v-loading="loading">
-    <iframe class="iframe" v-bind="$attrs" :src="src" @load="onFrameLoad" />
+  <div
+    class="iframe-box"
+    v-loading="loading"
+  >
+    <iframe
+      class="iframe"
+      v-bind="$attrs"
+      :src="src"
+      @load="onFrameLoad"
+    />
   </div>
 </template>
 <script lang="ts" setup>

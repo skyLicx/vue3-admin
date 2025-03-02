@@ -14,11 +14,21 @@
         label-width="auto"
         :disabled="props.isView"
       >
-        <el-form-item label="Name" prop="name">
+        <el-form-item
+          label="Name"
+          prop="name"
+        >
           <el-input v-model="form.name" />
         </el-form-item>
-        <el-form-item label="City" prop="city">
-          <el-select v-model="form.city" placeholder="Select" clearable>
+        <el-form-item
+          label="City"
+          prop="city"
+        >
+          <el-select
+            v-model="form.city"
+            placeholder="Select"
+            clearable
+          >
             <el-option
               v-for="item in cityOptions"
               :key="item.value"
@@ -27,15 +37,27 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Stars" prop="stars">
-          <el-input-number v-model="form.stars" :min="0" :max="10" />
+        <el-form-item
+          label="Stars"
+          prop="stars"
+        >
+          <el-input-number
+            v-model="form.stars"
+            :min="0"
+            :max="10"
+          />
         </el-form-item>
       </el-form>
     </div>
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="onCancel">取消</el-button>
-        <el-button type="primary" @click="onConfirm">确定</el-button>
+        <el-button
+          v-if="!props.isView"
+          type="primary"
+          @click="onConfirm"
+          >确定</el-button
+        >
       </div>
     </template>
   </el-dialog>
